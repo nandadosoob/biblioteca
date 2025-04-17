@@ -1,0 +1,4 @@
+#Criando o projeto do zero:
+npm create vite@latest
+cd vite-project
+npm install
