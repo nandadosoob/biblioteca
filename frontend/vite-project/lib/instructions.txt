@@ -2,3 +2,9 @@
 npm create vite@latest
 cd vite-project
 npm install
+
+
+#Comandos básicos de uso do git:
+git add * //Adiciona as modificações na área temporária (staging area)
+git commit -m "mensagem" //Submete a atualização no repositório local
+git push -u origin main //Sobe pro github
