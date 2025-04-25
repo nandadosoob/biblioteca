@@ -1,39 +1,92 @@
 import { NavLink } from 'react-router-dom'
-import React from 'react'
+import { IconSearch, IconPencil, IconCirclePlus, IconBook2, IconUserEdit, IconHistory, IconLibrary, IconBookmarks, IconMoon, IconSun } from '@tabler/icons-react';
+import React, { useState } from 'react'
 import './Menu.css'
 export default function Menu() {
 
+    const [submenu, setSubmenu] = useState(false)
+
+
+    const MostraSubMenu = () => {
+        setSubmenu(!submenu)
+    }
+
     return (
         <div>
-            <div></div>
+
             <nav>
-                <h3>Descubra</h3>
+                <img src="bibliotecLogoDFB.PNG" id='logo' />
+                <div id='divdescubra'>
+                    <h3>Descubra</h3>
+
+                    <NavLink to="/">
+                        <IconSearch className='icone' />
+                        Pesquisar livro
+                    </NavLink>
+
+                </div>
+
+
+
+                <div id='adm'>
+                    <h3>Administração</h3>
+
+                    <NavLink to="/Edicao">
+                        <IconPencil className='icone' />
+                        Edição
+                    </NavLink>
+
+                    {/* <NavLink to="/">
+                    <IconBook2 className='icone'/>
+                    Livros
+                </NavLink>
 
                 <NavLink to="/">
-                    Pesquisar livro
-                </NavLink>
+                <IconUserEdit className='icone'/>
+                    Usuarios
+                </NavLink> */}
 
-                <h3>Administração</h3>
+                    <NavLink to="/Cadastro">
+                        <IconCirclePlus className='icone' onClick={MostraSubMenu} />
+                        Cadastro
+                    </NavLink>
 
-                <NavLink to="/Edicao">
-                    Edição
-                </NavLink>
+                    {/* <NavLink to="/" >
+                        <IconBook2 sclassName='icone' />
+                        Livros
+                    </NavLink> */}
 
-                <NavLink to="/Cadastro">
-                    Cadastro
-                </NavLink>
+                    {/* <NavLink to="/" >
+                        <IconUserPlus className='icone' />
+                        Usuarios
+                    </NavLink> */}
 
-                <NavLink to="/">
-                    Histórico
-                </NavLink>
 
-                <NavLink to="/">
-                    Dividas
-                </NavLink>
 
-                <NavLink to="/">
-                    Emprestimo
-                </NavLink>
+                    <NavLink to="/">
+                        <IconHistory className='icone' />
+                        Histórico
+                    </NavLink>
+
+                    <NavLink to="/">
+                        <IconLibrary className='icone' />
+                        Dividas
+                    </NavLink>
+
+                    <NavLink to="/">
+                        <IconBookmarks className='icone' />
+                        Emprestimo
+                    </NavLink>
+
+                </div>
+
+                <footer>
+                    <button>
+                        <IconMoon className='icone' />
+                        {/* <IconSun className='icone'/> */}
+                        Moon
+                    </button>
+                </footer>
 
             </nav>
         </div>

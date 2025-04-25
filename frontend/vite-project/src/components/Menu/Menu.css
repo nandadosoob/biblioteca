@@ -4,12 +4,48 @@ nav {
     flex-direction: column;
     height: 100vh;
     width: 20vw;
-    background-color: antiquewhite;
+    background-color: var(--light-brown);
+
     
 }
 
 
-NavLink{
+nav a{
     text-decoration: none;
-
+    color: var(--brown);
+    display: flex;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    
 }
+
+h3{
+    color: var(--brown);
+}
+
+
+
+#divdescubra{
+    margin-bottom: 8%;
+    margin-left: 5%;
+}
+
+#adm{
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+#logo{
+    width: 60%;
+    align-self: center;
+    margin-top: -8%;
+    margin-bottom: -5%;
+}
+
+.icone{
+    margin-right: 8px;
+    color: var(--brown);
+    stroke: 2;
+}
+
