@@ -4,11 +4,16 @@ import React, { useState } from 'react'
 import './Menu.css'
 export default function Menu() {
 
-    const [submenu, setSubmenu] = useState(false)
+    const [submenuEdit, setSubmenuEdit] = useState(false)
+    const MostraSubMenuEdit = () => {
+        setSubmenuEdit(!submenuEdit)
+    }
+
+    const [submenuCadas, setSubmenuCadas] = useState(false)
 
 
-    const MostraSubMenu = () => {
-        setSubmenu(!submenu)
+    const MostraSubMenuCadas = () => {
+        setSubmenuCadas(!submenuCadas)
     }
 
     return (
@@ -31,35 +36,39 @@ export default function Menu() {
                 <div id='adm'>
                     <h3>Administração</h3>
 
-                    <NavLink to="/Edicao">
+                    <NavLink onClick={MostraSubMenuEdit}>
                         <IconPencil className='icone' />
                         Edição
                     </NavLink>
 
-                    {/* <NavLink to="/">
-                    <IconBook2 className='icone'/>
-                    Livros
-                </NavLink>
+                    {submenuEdit && (
 
-                <NavLink to="/">
-                <IconUserEdit className='icone'/>
-                    Usuarios
-                </NavLink> */}
+                        <><NavLink to="/EdicaoLivro" id='bookSub'>
+                            <IconBook2 className='icone' />
+                            Livros
+                        </NavLink>
+                        <NavLink to="/EdicaoUsuario" id='userSub'>
+                            <IconUserEdit className='icone' />
+                            Usuarios
+                        </NavLink></>
+                    )}
 
-                    <NavLink to="/Cadastro">
-                        <IconCirclePlus className='icone' onClick={MostraSubMenu} />
+                    <NavLink onClick={MostraSubMenuCadas}>
+                        <IconCirclePlus className='icone' />
                         Cadastro
                     </NavLink>
 
-                    {/* <NavLink to="/" >
-                        <IconBook2 sclassName='icone' />
-                        Livros
-                    </NavLink> */}
+                    {submenuCadas && (
 
-                    {/* <NavLink to="/" >
-                        <IconUserPlus className='icone' />
-                        Usuarios
-                    </NavLink> */}
+                        <><NavLink to="/CadastroLivro" id='bookSub'>
+                            <IconBook2 className='icone' />
+                            Livros
+                        </NavLink>
+                            <NavLink to="/CadastroUsuario" id='userSub'>
+                                <IconUserEdit className='icone' />
+                                Usuarios
+                            </NavLink></>
+                    )}
 
 
 
