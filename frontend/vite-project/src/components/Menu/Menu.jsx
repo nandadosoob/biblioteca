@@ -25,7 +25,7 @@ export default function Menu() {
                 <div id='divdescubra'>
                     <h3>Descubra</h3>
 
-                    <NavLink to="/Pesquisa">
+                    <NavLink to="/pesquisa">
                         <IconSearch className='icone' />
                         Pesquisar livro
                     </NavLink>
