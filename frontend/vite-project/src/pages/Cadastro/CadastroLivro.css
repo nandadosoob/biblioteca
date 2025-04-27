@@ -1,0 +1,52 @@
+#main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+#questionario{
+    border-radius: 40px;
+    background-color: var(--white);
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--brown);
+
+
+}
+
+#box1{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+
+#box3{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#box2{
+    width: 100%;
+
+}
+
+
+input, select{
+    border-radius: 20%;
+    border: 0;
+}
+
+#campoImagem{
+    background-color: var(--light-gray);
+    width: 120px;
+    height: 300px;
+    border-radius: 10px;
+}

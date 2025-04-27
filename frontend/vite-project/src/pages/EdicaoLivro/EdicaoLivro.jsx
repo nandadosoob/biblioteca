@@ -1,6 +1,6 @@
 import React from "react"
 import './EdicaoLivro.css'
-import { IconBook } from '@tabler/icons-react';
+import { IconBook, IconTrash, IconPencil } from '@tabler/icons-react';
 
 
 
@@ -23,14 +23,17 @@ const EdicaoLivro = () => {
 
         <div id="listaLivros">
           <div className="item1">
-            <img src="" alt="" />
+            <div id="imge">
+              <img src="" alt="" />
+
+            </div>
             <div id="informacoes">
-              <h5>titulo</h5>
+              <h4>titulo</h4>
               <p>dados</p>
             </div>
             <div id="botoes">
-              <button>Editar</button>
-              <button>Excluir</button>
+              <button id="botaoEditar" ><IconPencil className="iconeEdit" /></button>
+              <button id="botaoExcluir"><IconTrash className="iconeEdit"/></button>
 
             </div>
           </div>

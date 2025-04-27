@@ -37,7 +37,7 @@
     width: 100%;
 }
 
-#bk{
+#Name{
     width: 80%;
     margin-bottom: 10px;
 }
@@ -46,7 +46,7 @@
     width: 10%;
 }
 
-#listaLivros{
+#listaUsuarios{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -57,13 +57,16 @@
     display: flex;
     flex-direction: row;
     border-bottom: 2px solid var(--brown);
-    height: 250px;
+    height: 80px;
+    width: 100%;
 }
 
 #informacoes{
-    margin-top: 20px;
-
-    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+    width: 68%;
     height: 100%;
 }
 
@@ -73,12 +76,15 @@
     justify-content: space-evenly;
     align-items: center;
     height: 100%;
-    width: 25%;
+    width: 28%;
 }
 
-#imge{
+#user{
     height: 100%;
-    width: 25%;
+    width: 12%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #botaoEditar{
@@ -93,10 +99,19 @@
     height: 45px;
     border-radius: 8px;
     background-color: var(--brown);
-
+    
 }
 
 .iconeEdit{
     color: var(--white);
     stroke: 2;
+}
+
+#iconeUser{
+    color: var(--brown);
+    stroke: 2;
+    width: 60%;
+    height: 60%;
+    /* align-self: center;
+    justify-self: center; */
 }
