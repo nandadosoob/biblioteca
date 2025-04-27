@@ -1,5 +1,72 @@
 #main{
     display: flex;
+    flex-direction: column;
     height: 100%;
 
+}
+
+.pagina-pesquisa {
+    padding: 20px;
+}
+
+.barra-pesquisa-container {
+    display: flex;
+    align-items: center;
+    background-color: var(---gray-light);
+    width: 50%;
+    gap: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+#barrapesquisa {
+    width: 50%;
+    height: 40px;
+    background-color: var(---gray-light);
+    border: none;
+    border-radius: 40px;
+    padding-left: 15px;
+    font-size: 16px;
+    outline: none;
+}
+
+#classificacao{
+    display: flex;
+    flex-direction: row;
+    background-color: green;
+    margin-bottom: 2px solid var(--brown);
+    
+    width: 100%;
+}
+
+#bk{
+    justify-self: flex-start;
+}
+
+#edit{
+    justify-self: flex-end;
+}
+
+#del{
+    justify-self: flex-end;
+}
+
+#listaLivros{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.item1{
+    display: flex;
+    flex-direction: row;
+}
+
+#informacoes{
+    width: 50%;
+}
+
+#botoes{
+    width: 20%;
 }
