@@ -7,12 +7,16 @@ import CadastroLivro from './pages/Cadastro/CadastroLivro'
 import CadastroUsuario from './pages/Cadastro/CadastroUsuario'
 import Pesquisa from './pages/Pesquisa/Pesquisa'
 import LayoutBase from './components/LayoutBase'
+import Login from './pages/Login/Login'
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="authenticate" element={<Authentication />} />
+        <Route path="authenticate" element={<Authentication />} />        
+         <Route path="/login" element={<Login />} />
+
         <Route path="/" element={<LayoutBase />}>
           <Route index element={<Home />} />
           <Route path="pesquisa" element={<Pesquisa />} />

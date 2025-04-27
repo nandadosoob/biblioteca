@@ -1,0 +1,92 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+  }
+  
+  /* Painel esquerdo com imagem */
+  .left-panel {
+    width: 35%;
+    background: url('/login_biblioteca.jpeg') center/cover no-repeat;
+  }
+  
+  /* Painel direito que ocupa o resto */
+  .right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3c271f;
+  }
+  
+  /* Card de login */
+  .login-card {
+    background: #e1d2bd;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+  }
+  
+  /* Logo */
+  .logo img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+  }
+  
+  /* “Entrar” */
+  .login-card h2 {
+    margin-bottom: 1.5rem;
+    color: #4a3c35;
+  }
+  
+  .login-card input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #c9b79c;
+    font-size: 1rem;
+  }
+  
+  /* Botão */
+  .login-card button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 6px;
+    background: #c44f50;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .login-card button:hover {
+    background-color: #a93d40; 
+  }
+  .login-card .link-signup:hover {
+    color: #a93d40; 
+    text-decoration: underline;
+  }
+  
+  /* Link cadastro */
+  .login-card p {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #4a3c35;
+  }
+  
+  .login-card .link-signup {
+    color: #4a3c35;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  
