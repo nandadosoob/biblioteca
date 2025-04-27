@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { IconSearch, IconPencil, IconCirclePlus, IconBook2, IconUserEdit, IconHistory, IconLibrary, IconBookmarks, IconMoon, IconSun } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import './Menu.css'
+
 export default function Menu() {
 
     const [submenuEdit, setSubmenuEdit] = useState(false)
@@ -24,7 +25,7 @@ export default function Menu() {
                 <div id='divdescubra'>
                     <h3>Descubra</h3>
 
-                    <NavLink to="/">
+                    <NavLink to="/Pesquisa">
                         <IconSearch className='icone' />
                         Pesquisar livro
                     </NavLink>
@@ -101,3 +102,4 @@ export default function Menu() {
         </div>
     )
 }
+
