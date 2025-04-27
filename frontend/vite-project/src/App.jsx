@@ -8,6 +8,8 @@ import CadastroUsuario from './pages/Cadastro/CadastroUsuario'
 import Pesquisa from './pages/Pesquisa/Pesquisa'
 import LayoutBase from './components/LayoutBase'
 import Login from './pages/Login/Login'
+import Historico from './pages/Historico/Historico';
+
 
 
 function App() {
@@ -16,7 +18,6 @@ function App() {
       <Routes>
         <Route path="authenticate" element={<Authentication />} />        
          <Route path="/login" element={<Login />} />
-
         <Route path="/" element={<LayoutBase />}>
           <Route index element={<Home />} />
           <Route path="pesquisa" element={<Pesquisa />} />
@@ -25,7 +26,7 @@ function App() {
           <Route path="Cadastro" element={<Home />} />
           <Route path="CadastroLivro" element={<CadastroLivro />} />
           <Route path="CadastroUsuario" element={<CadastroUsuario />} />
-          <Route path="Historico" element={<Home />} />
+          <Route path="Historico" element={<Historico />} />
           <Route path="Dividas" element={<Home />} />
           <Route path="Emprestimo" element={<Home />} />
         </Route>
