@@ -6,6 +6,7 @@
     --red: #be4c54;
     --white: #FFFFFF;
     --extra-light-brown: #FFF4E3;
+    ---gray-light: #d9d9d9;
 }
 
 body {
@@ -19,46 +20,49 @@ body {
 .barra-pesquisa-container {
     display: flex;
     align-items: center;
+    background-color: var(---gray-light);
+    width: 33vw;
     gap: 10px;
+    border-radius: 5px;
     margin-bottom: 30px;
 }
 
 #barrapesquisa {
     width: 30vw;
     height: 40px;
-    background-color: #d9d9d9;
+    background-color: var(---gray-light);
     border: none;
     border-radius: 10px;
     padding-left: 15px;
     font-size: 16px;
+    outline: none;
 }
 
-.botao-pesquisa {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-}
 
 .livros-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height:70vh ;
+    overflow-y: auto;
+    padding-right: 10px;
     gap: 20px;
+    
 }
 
 .livro-card {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--white);
-    padding: 10px;
+    padding: 5px;
+    width: 150px;
     border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    
 }
 
 .livro-card img {
     width: 100%;
-    height: 250px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -75,4 +79,10 @@ body {
     color: var(--brown);
     font-size: 12px;
     text-align: center;
+}
+
+button{
+    border: none;
+    background-color: var(---gray-light);
+    cursor: pointer;
 }

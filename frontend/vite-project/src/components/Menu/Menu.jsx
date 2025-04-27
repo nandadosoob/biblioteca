@@ -83,7 +83,7 @@ export default function Menu() {
                         Dividas
                     </NavLink>
 
-                    <NavLink to="/">
+                    <NavLink to="/emprestimo">
                         <IconBookmarks className='icone' />
                         Emprestimo
                     </NavLink>

@@ -6,6 +6,7 @@ import EdicaoUsuario from './pages/EdicaoUsuario/EdicaoUsuario'
 import CadastroLivro from './pages/Cadastro/CadastroLivro'
 import CadastroUsuario from './pages/Cadastro/CadastroUsuario'
 import Pesquisa from './pages/Pesquisa/Pesquisa'
+import Emprestimo from "./pages/Emprestimo/emprestimo";
 import LayoutBase from './components/LayoutBase'
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route path="CadastroUsuario" element={<CadastroUsuario />} />
           <Route path="Historico" element={<Home />} />
           <Route path="Dividas" element={<Home />} />
-          <Route path="Emprestimo" element={<Home />} />
+          <Route path="Emprestimo" element={<Emprestimo />} />
         </Route>
       </Routes>
     </BrowserRouter>
