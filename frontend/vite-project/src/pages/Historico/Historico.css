@@ -1,0 +1,50 @@
+.historico-container {
+    padding: 20px;
+  }
+  
+  .historico-titulo {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: left;
+    color: #333;
+  }
+  
+  .historico-table-container {
+    overflow-x: auto;
+  }
+  
+  .historico-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .historico-table th,
+  .historico-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .historico-table th {
+    background-color: #d5c8b0;
+    font-weight: bold;
+    color: #000000;
+  }
+  
+  .historico-table .td-livro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .livro-capa {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  

@@ -13,7 +13,6 @@
     background: url('/login_biblioteca.jpeg') center/cover no-repeat;
   }
   
-  /* Painel direito que ocupa o resto */
   .right-panel {
     flex: 1;
     display: flex;

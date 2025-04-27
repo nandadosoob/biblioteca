@@ -71,22 +71,20 @@ export default function Menu() {
                             </NavLink></>
                     )}
 
+                            <NavLink to="/Historico">
+                            <IconHistory className='icone' />
+                            Histórico
+                            </NavLink>
 
+                            <NavLink to="/Dividas">
+                            <IconLibrary className='icone' />
+                            Dívidas
+                            </NavLink>
 
-                    <NavLink to="/">
-                        <IconHistory className='icone' />
-                        Histórico
-                    </NavLink>
-
-                    <NavLink to="/">
-                        <IconLibrary className='icone' />
-                        Dividas
-                    </NavLink>
-
-                    <NavLink to="/emprestimo">
-                        <IconBookmarks className='icone' />
-                        Emprestimo
-                    </NavLink>
+                            <NavLink to="/emprestimo">
+                                <IconBookmarks className='icone' />
+                                Emprestimo
+                            </NavLink>
 
                 </div>
 

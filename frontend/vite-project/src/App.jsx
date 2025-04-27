@@ -6,7 +6,7 @@ import EdicaoUsuario from './pages/EdicaoUsuario/EdicaoUsuario'
 import CadastroLivro from './pages/Cadastro/CadastroLivro'
 import CadastroUsuario from './pages/Cadastro/CadastroUsuario'
 import Pesquisa from './pages/Pesquisa/Pesquisa'
-import Emprestimo from "./pages/Emprestimo/emprestimo";
+import Emprestimo from "./pages/Emprestimo/Emprestimo";
 import LayoutBase from './components/LayoutBase'
 import Login from './pages/Login/Login'
 import Historico from './pages/Historico/Historico';
