@@ -2,7 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './pages/Home/Home'
 import Authentication from './pages/Authentication/Authentication'
 import EdicaoLivro from './pages/EdicaoLivro/EdicaoLivro'
+import TelaEdicaoLivro from './pages/EdicaoLivro/TelaEdicaoLivro'
 import EdicaoUsuario from './pages/EdicaoUsuario/EdicaoUsuario'
+import TelaEdicaoUsuario from './pages/EdicaoUsuario/TelaEdicaoUsuario'
 import CadastroLivro from './pages/Cadastro/CadastroLivro'
 import CadastroUsuario from './pages/Cadastro/CadastroUsuario'
 import Pesquisa from './pages/Pesquisa/Pesquisa'
@@ -23,7 +25,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="pesquisa" element={<Pesquisa />} />
           <Route path="EdicaoLivro" element={<EdicaoLivro />} />
+          <Route path="TelaEdicaoLivro" element={<TelaEdicaoLivro/>} />
           <Route path="EdicaoUsuario" element={<EdicaoUsuario />} />
+          <Route path="TelaEdicaoUsuario" element={<TelaEdicaoUsuario />} />
           <Route path="Cadastro" element={<Home />} />
           <Route path="CadastroLivro" element={<CadastroLivro />} />
           <Route path="CadastroUsuario" element={<CadastroUsuario />} />

@@ -1,0 +1,21 @@
+#link{
+    text-decoration: none;
+    color: black;
+}
+
+#boxEdit{
+    width: 80%;
+    height: 80vh;
+    background-color: var(--white);
+    border: 2px solid var(--medium-brown);
+    border-radius: 20px;
+}
+
+#capaLivro{
+    width: 30%;
+}
+
+#ttl, #isbn, #editora{
+    width: 69%;
+    
+}

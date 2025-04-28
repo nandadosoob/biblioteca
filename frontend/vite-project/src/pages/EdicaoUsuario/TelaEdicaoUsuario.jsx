@@ -1,7 +1,9 @@
 import React from "react";
-import './CadastroUsuario.css'
+import { Link } from 'react-router-dom'
+import './TelaEdicaoUsuario.css'
+// import EdicaoUsuario from "./EdicaoUsuario";
 
-export default function CadastroUsuario() {
+export default function TelaEdicaoUsuario() {
     return (
         <div id="main4">
 
@@ -37,8 +39,10 @@ export default function CadastroUsuario() {
                 <input type="number" />
 
                 <div id="divBotoes">
+                    <button id="botaoCadastra">Concluir</button>
+                    <Link to="/EdicaoUsuario" id="link">
                     <button id="botaoCancela">Cancelar</button>
-                    <button id="botaoCadastra">Cadastrar</button>
+                    </Link>
 
                 </div>
 

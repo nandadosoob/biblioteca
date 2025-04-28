@@ -5,13 +5,15 @@ import './CadastroLivro.css'
 export default function CadastroLivro() {
     return (
         <div>
-            <div id="main">
+            <div id="main3">
 
                 <div id="questionario">
                     <div id="box1">
-                        <div id="campoImagem">
-                            <div>
-                                <p>Adicone a capa do livro aqui</p>
+                        <div id="box4">
+                            <div id="campoImagem">
+                                <div id="boxAddCapa">
+                                    <p id="textoAddCapa">Adicone a capa do livro aqui</p>
+                                </div>
                             </div>
 
                         </div>
@@ -20,6 +22,7 @@ export default function CadastroLivro() {
                             <p>Título</p>
                             <input type="text" />
 
+
                             <p>ISBN</p>
                             <input type="number" />
 
@@ -27,14 +30,15 @@ export default function CadastroLivro() {
                             <select name="" id="">
                                 <option value=""></option>
                             </select>
+
+                            <p>Edição do livro</p>
+                            <input type="text" />
                         </div>
 
                     </div>
 
                     <div id="box2">
 
-                        <p>Edição do livro</p>
-                        <input type="text" />
 
                         <p>Quantidade de autores do livro</p>
                         <input type="number" />
@@ -59,6 +63,11 @@ export default function CadastroLivro() {
 
                     </div>
 
+                    <div id="divBotoes">
+                        <button id="botaoCancela">Caancelar</button>
+                        <button id="botaoCadastra">Cadastrar</button>
+
+                    </div>
 
 
 

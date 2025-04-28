@@ -1,4 +1,4 @@
-#main{
+#main1{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -30,7 +30,7 @@
     outline: none;
 }
 
-#classificacao{
+#classificacaoLivro{
     display: flex;
     flex-direction: row;
     border-bottom: 2px solid var(--brown);
@@ -60,7 +60,7 @@
     height: 250px;
 }
 
-#informacoes{
+#informacoesLivro{
     margin-top: 20px;
 
     width: 50%;
@@ -99,4 +99,8 @@
 .iconeEdit{
     color: var(--white);
     stroke: 2;
+}
+
+#dadosLivro{
+    margin-left: 0;
 }
