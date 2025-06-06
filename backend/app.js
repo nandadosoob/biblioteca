@@ -1,4 +1,3 @@
-
 const express = require('express');
 const cors = require('cors');
 const routes = require('./src/routes');
@@ -15,4 +14,6 @@ app.listen(port, () => {
 	console.log(`Servidor escutando na porta :${port}`);
 });
 
-app.get('')
+app.get('', (req, res) => {
+  res.send('Rota raiz sem caminho definido');
+});
