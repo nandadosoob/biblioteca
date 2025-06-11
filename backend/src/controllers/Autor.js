@@ -12,7 +12,8 @@ async function create(req, res){
     } catch( error ){
         res.status(500).json({error: 'Erro ao criar autor'});
 	    return;
-    }
+    } 
+    
 };
 
 async function list(req, res){
