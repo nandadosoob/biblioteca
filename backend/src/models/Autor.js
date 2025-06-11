@@ -24,5 +24,37 @@ async function list(){
     }
 }
 
+async function get(id_autor){
+     const query = "SELECT * FROM autores WHERE id_autor = $1";
+    try {
+        let resultado = await pgPool.query(query, [id_autor]);
+        return resultado.rows[0]; // Retorna um único autor
+    } catch(error) {
+        console.error('Erro no get do autor:', error.message); 
+        throw error;
+    }
+}
 
-module.exports = {create:create, list:list};
+async function update(id_autor, nome_autor){
+    const query = "UPDATE autores SET nome_autor = $1 WHERE id_autor = $2";
+    try {
+        await pgPool.query(query, [nome_autor, id_autor]);
+        return;
+    } catch(error) {
+        console.error('Erro no update do autor:', error.message); 
+        throw error;
+    }
+}
+
+async function remove(id_autor) {
+    const query = "DELETE FROM autores WHERE id_autor = $1";
+    try {
+        await pgPool.query(query, [id_autor]);
+    } catch (error) {
+        console.error('Erro no remove do autor:', error.message);
+        throw error;
+    }
+}
+
+
+module.exports = {create:create, list:list, get:get, update:update, remove:remove};

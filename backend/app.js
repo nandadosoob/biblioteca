@@ -19,6 +19,3 @@ app.get('', (req, res) => {
   res.send('Rota raiz sem caminho definido');
 });
 
-app.post(port,() =>{
-
-})

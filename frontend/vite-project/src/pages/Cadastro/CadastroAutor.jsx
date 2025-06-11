@@ -1,45 +1,75 @@
 import React, { useState } from 'react';
 
 function CadastroAutor() {
-  const [nomeAutor, setNomeAutor] = useState('');
-  const [mensagem, setMensagem] = useState('');
+  const [id_autor, setId_autor] = useState('');
+  const [nome, setNome] = useState('');
+  const [autor, setAutor] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const api = 'http://localhost:3000/api/autores';
 
-    try {
-      const resposta = await fetch('http://localhost:3000/api/autor', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ nome_autor: nomeAutor }),
-      });
-
-      if (resposta.ok) {
-        setMensagem('Autor cadastrado com sucesso!');
-        setNomeAutor('');
-      } else {
-        setMensagem('Erro ao cadastrar autor.');
-      }
-    } catch (error) {
-      setMensagem('Erro ao conectar com o servidor.');
-    }
+  const cadastrar = async () => {
+    await fetch(api, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome_autor: nome })
+    });
+    alert('Cadastrado com sucesso');
+    setNome('');
   };
+
+  const buscar = async () => {
+    const res = await fetch(`${api}/${id_autor}`);
+    const data = await res.json();
+    setAutor(data);
+    setNome(data.nome_autor);
+  };
+
+  const atualizar = async () => {
+    await fetch(`${api}/${id_autor}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome_autor: nome })
+    });
+    alert('Atualizado');
+  };
+
+  const remover = async () => {
+  const id = parseInt(id_autor);
+  if (!id) {
+    alert('ID inválido');
+    return;
+  }
+
+  const res = await fetch(`${api}/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (res.status === 204) {
+    alert('Removido com sucesso');
+    setId_autor('');
+    setNome('');
+    setAutor(null);
+  } else {
+    alert('Erro ao remover');
+  }
+};
 
   return (
     <div>
-      <h2>Cadastrar Autor</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome do autor"
-          value={nomeAutor}
-          onChange={(e) => setNomeAutor(e.target.value)}
-        />
-        <button type="submit">Cadastrar</button>
-      </form>
-      {mensagem && <p>{mensagem}</p>}
+      <h3>Cadastro de Autor</h3>
+      <input value={id_autor} onChange={e => setId_autor(e.target.value)} placeholder="ID" /><br />
+      <input value={nome} onChange={e => setNome(e.target.value)} placeholder="Nome do Autor" /><br />
+
+      <button onClick={cadastrar}>Cadastrar</button>
+      <button onClick={buscar}>Buscar</button>
+      <button onClick={atualizar}>Atualizar</button>
+      <button onClick={remover}>Remover</button>
+
+      {autor && (
+        <div>
+          <p><strong>Autor:</strong> {autor.nome_autor}</p>
+        </div>
+      )}
     </div>
   );
 }
