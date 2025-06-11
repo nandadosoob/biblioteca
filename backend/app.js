@@ -11,7 +11,7 @@ app.get( '/', (req,res) => {
 app.use( '/api',routes);
 
 app.listen(port, () => {
-	console.log(`Servidor escutando na porta :${port}`);
+	console.log(`Servidor escutando na porta: ${port}`);
 });
 
 app.get('', (req, res) => {
