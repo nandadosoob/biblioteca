@@ -10,6 +10,7 @@ app.get( '/', (req,res) => {
 });
 app.use( '/api',routes);
 
+
 app.listen(port, () => {
 	console.log(`Servidor escutando na porta: ${port}`);
 });
@@ -17,3 +18,7 @@ app.listen(port, () => {
 app.get('', (req, res) => {
   res.send('Rota raiz sem caminho definido');
 });
+
+app.post(port,() =>{
+
+})

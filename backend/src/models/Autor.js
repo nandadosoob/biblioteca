@@ -2,7 +2,7 @@ const dbConfig = require('../dbConfig');
 const pgPool = dbConfig.pgPool;
 
 async function create(nome_autor){
-    const query = "INSERT INTO autores(nome_autor) VALUES ($1)"
+    const query = "INSERT INTO autores (nome_autor) VALUES ($1)"
     let values = [nome_autor];
     try{
         await pgPool.query(query, values);

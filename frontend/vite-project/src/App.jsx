@@ -12,6 +12,7 @@ import Emprestimo from "./pages/Emprestimo/Emprestimo";
 import LayoutBase from './components/LayoutBase'
 import Login from './pages/Login/Login'
 import Historico from './pages/Historico/Historico';
+import CadastroAutor from './pages/Cadastro/CadastroAutor';
 
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path="Historico" element={<Historico />} />
           <Route path="Dividas" element={<Home />} />
           <Route path="Emprestimo" element={<Emprestimo />} />
+          <Route path="/cadastroautor" element={<CadastroAutor />} />
         </Route>
       </Routes>
     </BrowserRouter>
