@@ -5,7 +5,7 @@ function CadastroAutor() {
   const [nome, setNome] = useState('');
   const [autor, setAutor] = useState(null);
 
-  const api = 'http://localhost:3000/api/autores';
+  const api = 'http://localhost:3000/api/autor';
 
   const cadastrar = async () => {
     await fetch(api, {
@@ -35,12 +35,16 @@ function CadastroAutor() {
 
   const remover = async () => {
   const id = parseInt(id_autor);
+  console.log(id_autor);
+  
   if (!id) {
     alert('ID inválido');
     return;
   }
 
-  const res = await fetch(`${api}/${id}`, {
+console.log(`${api}/${id_autor}`)
+
+  const res = await fetch(`${api}/${id_autor}`, {
     method: 'DELETE'
   });
 
@@ -50,7 +54,7 @@ function CadastroAutor() {
     setNome('');
     setAutor(null);
   } else {
-    alert('Erro ao remover');
+    alert('Erro ao remover',res.status);
   }
 };
 
