@@ -8,7 +8,7 @@ async function create(nome_autor){
         await pgPool.query(query, values);
         return;
     }catch(error){
-        console.log('Erro no create do autor');
+        console.log('Erro no create no model do autor', error.message);
         throw error;
     }
 }

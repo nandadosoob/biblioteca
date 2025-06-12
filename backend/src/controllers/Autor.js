@@ -12,6 +12,7 @@ async function create(req, res){
         res.status(201).json({message:'ok'});
 	    return;
     } catch( error ){
+        console.error('erro na função create do autor',error.message);
         res.status(500).json({error: 'Erro ao criar autor'});
 	    return;
     } 

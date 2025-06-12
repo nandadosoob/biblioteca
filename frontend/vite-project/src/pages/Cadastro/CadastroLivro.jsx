@@ -1,8 +1,21 @@
 import React from "react";
+import {useState, useEffect} from 'react';
 import { IconUser } from '@tabler/icons-react';
 import './CadastroLivro.css'
 
 export default function CadastroLivro() {
+    const [nomeAutor, setNomeAutor] = useState('');    
+
+    const cadastrar = async() => {
+        let parametros = {
+            method:'POST',
+            headers:{'Content-Type': 'application/json'},
+            body: JSON.stringify({nome_autor:nomeAutor})
+        }
+        await fetch('http://localhost:3000/api/autores', parametros)
+        
+    }
+
     return (
         <div>
             <div id="main3">
@@ -39,6 +52,9 @@ export default function CadastroLivro() {
 
                     <div id="box2">
 
+                        <p>Autor</p>
+                        <input type="text" placeholder="Nome do autor" value={nomeAutor} onChange={(e) => setNomeAutor(e.target.value)}></input>
+                        <button>Adicionar</button>
 
                         <p>Quantidade de autores do livro</p>
                         <input type="number" />

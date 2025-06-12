@@ -35,7 +35,7 @@ function App() {
           <Route path="Historico" element={<Historico />} />
           <Route path="Dividas" element={<Home />} />
           <Route path="Emprestimo" element={<Emprestimo />} />
-          <Route path="/cadastroautor" element={<CadastroAutor />} />
+          <Route path="Autor" element={<CadastroAutor />} />
         </Route>
       </Routes>
     </BrowserRouter>
