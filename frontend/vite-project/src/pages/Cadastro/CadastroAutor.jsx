@@ -8,55 +8,72 @@ function CadastroAutor() {
   const api = 'http://localhost:3000/api/autor';
 
   const cadastrar = async () => {
-    await fetch(api, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome_autor: nome })
-    });
-    alert('Cadastrado com sucesso');
-    setNome('');
+    try {
+      await fetch(api, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome_autor: nome })
+      });
+      alert('Cadastrado com sucesso');
+      setNome('');
+    } catch (err) {
+      console.error('Erro ao cadastrar:', err);
+      alert('Erro ao cadastrar autor');
+    }
   };
 
   const buscar = async () => {
-    const res = await fetch(`${api}/${id_autor}`);
-    const data = await res.json();
-    setAutor(data);
-    setNome(data.nome_autor);
+    try {
+      const res = await fetch(`${api}/${id_autor}`);
+      if (!res.ok) throw new Error('Não encontrado');
+      const data = await res.json();
+      setAutor(data);
+      setNome(data.nome_autor);
+    } catch (err) {
+      console.error('Erro ao buscar:', err);
+      alert('Erro ao buscar autor');
+    }
   };
 
   const atualizar = async () => {
-    await fetch(`${api}/${id_autor}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome_autor: nome })
-    });
-    alert('Atualizado');
+    try {
+      await fetch(`${api}/${id_autor}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome_autor: nome })
+      });
+      alert('Atualizado');
+    } catch (err) {
+      console.error('Erro ao atualizar:', err);
+      alert('Erro ao atualizar autor');
+    }
   };
 
   const remover = async () => {
-  const id = parseInt(id_autor);
-  console.log(id_autor);
-  
-  if (!id) {
-    alert('ID inválido');
-    return;
-  }
+    const id = parseInt(id_autor);
+    if (!id) {
+      alert('ID inválido');
+      return;
+    }
 
-console.log(`${api}/${id_autor}`)
+    try {
+      const res = await fetch(`${api}/${id_autor}`, {
+        method: 'DELETE'
+      });
 
-  const res = await fetch(`${api}/${id_autor}`, {
-    method: 'DELETE'
-  });
-
-  if (res.status === 204) {
-    alert('Removido com sucesso');
-    setId_autor('');
-    setNome('');
-    setAutor(null);
-  } else {
-    alert('Erro ao remover',res.status);
-  }
-};
+      if (res.status === 204) {
+        alert('Removido com sucesso');
+        setId_autor('');
+        setNome('');
+        setAutor(null);
+      } else {
+        alert('Erro ao remover');
+      }
+    } catch (err) {
+      console.error('Erro ao remover:', err);
+      alert('Erro ao remover autor');
+    }
+  };
 
   return (
     <div>

@@ -45,20 +45,24 @@ async function get(req, res) {
 }
 
 async function update(req, res) {
-    const id_autor = req.params.id_autor;
-    const { nome_autor } = req.body;
+  const id_autor = req.params.id_autor;
+  const { nome_autor } = req.body;
 
-    if (!nome_autor || nome_autor.trim() === '') {
-        res.status(400).json({ error: 'Nome do autor obrigatório' });
-        return;
-    }
+  if (!nome_autor || nome_autor.trim() === '') {
+    return res.status(400).json({ error: 'Nome do autor obrigatório' });
+  }
 
-    try {
-        await modelAutor.update(id_autor, nome_autor);
-        res.status(200).json({ message: 'Autor atualizado com sucesso' });
-    } catch (error) {
-        res.status(500).json({ error: 'Erro ao atualizar autor' });
+  try {
+    const updatedCount = await modelAutor.update(id_autor, nome_autor);
+
+    if (updatedCount === 1) {
+      return res.status(200).json({ message: 'Autor atualizado com sucesso' });
+    } else {
+      return res.status(404).json({ error: 'Autor não encontrado' });
     }
+  } catch (error) {
+    return res.status(500).json({ error: 'Erro ao atualizar autor' });
+  }
 }
 
 async function remove(req, res) {

@@ -35,16 +35,17 @@ async function get(id_autor){
     }
 }
 
-async function update(id_autor, nome_autor){
-    const query = "UPDATE autores SET nome_autor = $1 WHERE id_autor = $2";
-    try {
-        await pgPool.query(query, [nome_autor, id_autor]);
-        return;
-    } catch(error) {
-        console.error('Erro no update do autor:', error.message); 
-        throw error;
-    }
+async function update(id_autor, nome_autor) {
+  const query = "UPDATE autores SET nome_autor = $1 WHERE id_autor = $2";
+  try {
+    const result = await pgPool.query(query, [nome_autor, id_autor]);
+    return result.rowCount; 
+  } catch (error) {
+    console.error('Erro no update do autor:', error.message);
+    throw error;
+  }
 }
+
 
 async function remove(id_autor) {
     const query = "DELETE FROM autores WHERE id_autor = $1";
