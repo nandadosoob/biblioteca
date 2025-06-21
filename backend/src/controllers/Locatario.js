@@ -1,22 +1,22 @@
 const modelLocatario = require('../models/Locatario');
 
 
-async function create(req, res){
-    if (!req.body.nome_locatario || req.body.nome_locatario.trim() === ''){
-        res.status(400).json({error: 'Obrigatorio: Nome do locatario, campo nome_locatario'});
+async function create(req, res) {
+    const {ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha} = req.body;
+
+    if (!nome_locatario || nome_locatario.trim() === '') {
+        res.status(400).json({ error: 'Obrigatorio: Nome do locatario, campo nome_locatario' });
         return;
     }
+
     try {
-        await modelLocatario.create(req.body.nome_locatario);
-        res.status(201).json({message:'ok'});
-        return;
-    } catch( error ){
-        console.error('erro na função create do locatario',error.message);
-        res.status(500).json({error: 'Erro ao criar locatario'});
-        return;
-    } 
-    
-};
+        await modelLocatario.create(ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha);
+        res.status(201).json({ message: 'ok' });
+    } catch (error) {
+        console.error('erro na função create do locatario', error.message);
+        res.status(500).json({ error: 'Erro ao criar locatario' });
+    }
+}
 
 async function list(req, res){
     try{
@@ -32,7 +32,7 @@ async function list(req, res){
 async function get(req, res) {
     const id_locatario = req.params.id_locatario;
     try {
-        const locatario = await modelAutor.get(id_locatario);
+        const locatario = await modelLocatario.get(id_locatario);
         if (!locatario) {
             res.status(404).json({ error: 'locatario não encontrado' });
             return;
@@ -45,14 +45,14 @@ async function get(req, res) {
 
 async function update(req, res) {
   const id_locatario = req.params.id_locatario;
-  const { nome_locatario } = req.body;
+  const { ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha } = req.body;
 
   if (!nome_locatario || nome_locatario.trim() === '') {
     return res.status(400).json({ error: 'Nome do locatario obrigatório' });
   }
 
   try {
-    const updatedCount = await modelLocatario.update(id_locatario, nome_locatario);
+    const updatedCount = await modelLocatario.update(id_locatario,ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha);
 
     if (updatedCount === 1) {
       return res.status(200).json({ message: 'locatario atualizado com sucesso' });
