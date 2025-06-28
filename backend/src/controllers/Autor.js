@@ -1,7 +1,6 @@
 const modelAutor = require('../models/Autor');
 
 
-
 async function create(req, res){
     if (!req.body.nome_autor || req.body.nome_autor.trim() === ''){
         res.status(400).json({error: 'Obrigatorio: Nome do autor, campo nome_autor'});

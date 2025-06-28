@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const autorController = require('./controllers/Autor');
 const locatarioController = require('./controllers/Locatario');
+const categoriaController = require('./controllers/Categoria');
 
 router.post('/autor',  autorController.create);
 router.get('/autor',  autorController.list);
@@ -14,6 +15,10 @@ router.get('/locatario',  locatarioController.list);
 router.get('/locatario/:id_locatario', locatarioController.get);
 router.put('/locatario/:id_locatario', locatarioController.update);   
 router.delete('/locatario/:id_locatario', locatarioController.remove); 
+
+
+router.post('/categoria', categoriaController.create);
+router.get('/categoria', categoriaController.list);
 
 
 module.exports = router;
