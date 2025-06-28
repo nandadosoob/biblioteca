@@ -7,13 +7,15 @@ export default function CadastroUsuario() {
     const [nome, setNome] = useState('');
     const [ra, setRa] = useState('');
     const [tipo, setTipo] = useState('Aluno');
-    const [curso, setCurso] = useState(''); 
+    const [curso, setCurso] = useState('1');
     const [dataNascimento, setDataNascimento] = useState('');
     const [email, setEmail] = useState('');
     const [telefone, setTelefone] = useState('');
-  
+    const [login, setLogin] = useState('');
+    const [senha, setSenha] = useState('');
+
     async function handleCadastrar(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         const dados = {
             nome_locatario: nome,
@@ -23,8 +25,9 @@ export default function CadastroUsuario() {
             data_nascimento: dataNascimento,
             email: email,
             telefone: telefone,
-            login: '', 
-            senha: ''  
+            login: tipo === "Bibliotecario" ? login : null,
+            senha: tipo === "Bibliotecario" ? senha : null,
+
         };
 
         try {
@@ -43,10 +46,12 @@ export default function CadastroUsuario() {
                 setNome('');
                 setRa('');
                 setTipo('Aluno');
-                setCurso('');
+                setCurso(1);
                 setDataNascimento('');
                 setEmail('');
                 setTelefone('');
+                setLogin('');
+                setSenha('');
             } else {
                 const erro = await resposta.json();
                 alert('Erro ao cadastrar: ' + (erro.error || 'Erro desconhecido'));
@@ -77,6 +82,17 @@ export default function CadastroUsuario() {
                     <option value="Professor">Professor</option>
                     <option value="Bibliotecario">Bibliotecario</option>
                 </select>
+
+                {tipo === "Bibliotecario" && (
+                    <>
+                        <p>Login</p>
+                        <input type="text" value={login} onChange={e => setLogin(e.target.value)} required />
+
+                        <p>Senha</p>
+                        <input type="password" value={senha} onChange={e => setSenha(e.target.value)} required />
+                    </>
+                )}
+
 
                 <p>Curso</p>
                 <select id="curso" value={curso} onChange={e => setCurso(e.target.value)} required>
