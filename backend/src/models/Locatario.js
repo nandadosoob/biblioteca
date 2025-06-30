@@ -18,7 +18,7 @@ async function create(ra, tipo, nome_locatario, curso, data_nascimento, email, t
 
 // Função responsável por listar todos os locatários
 async function list(){
-    const query = "SELECT nome_locatario FROM locatario";
+    const query = "SELECT id_locatario, nome_locatario FROM locatario";
     try {
         let locatario = await pgPool.query(query);
         return locatario.rows;

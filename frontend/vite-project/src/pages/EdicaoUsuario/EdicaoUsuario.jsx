@@ -26,14 +26,38 @@ export default function EdicaoUsuario() {
     }, []);
 
     const usuariosFiltrados = usuarios.filter(usuario =>
+        
         usuario.nome_locatario.toLowerCase().includes(pesquisa.toLowerCase())
     );
+
+    async function excluirUsuario(id) {
+    const confirmacao = window.confirm("Tem certeza que deseja excluir este usuário?");
+    if (!confirmacao) return;
+
+    try {
+        const resposta = await fetch(`http://localhost:3000/api/locatario/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (resposta.status === 204) {
+            alert('Usuário excluído com sucesso!');
+            setUsuarios(prev => prev.filter(u => u.id_locatario !== id));
+        } else {
+            alert('Erro ao excluir usuário.');
+           
+        }
+    } catch (error) {
+        console.error("Erro ao excluir:", error);
+        alert("Erro ao excluir usuário.");
+    }
+}
+
     return (
         <div>
             <div id="main2">
 
                 <div className="barra-pesquisa-container">
-                    <input id="barrapesquisa" type="text" placeholder="Pesquise aqui o usuário que você deseja editar" alue={pesquisa} onChange={e => setPesquisa(e.target.value)} />
+                    <input id="barrapesquisa" type="text" placeholder="Pesquise aqui o usuário que você deseja editar" value={pesquisa} onChange={e => setPesquisa(e.target.value)} />
                     <button><IconBook></IconBook></button>
                 </div>
 
@@ -45,6 +69,7 @@ export default function EdicaoUsuario() {
                 </div>
 
                 <div id="listaUsuarios">
+                    
                     {usuariosFiltrados.map((usuario) => (
                         <div key={usuario.id_locatario} className="item1User">
                             <div id="user">
@@ -59,7 +84,7 @@ export default function EdicaoUsuario() {
                                         <IconPencil className="iconeEdit" />
                                     </button>
                                 </Link>
-                                <button id="botaoExcluir">
+                                <button id="botaoExcluir" onClick={() => excluirUsuario(usuario.id_locatario)}>
                                     <IconTrash className="iconeEdit" />
                                 </button>
                             </div>

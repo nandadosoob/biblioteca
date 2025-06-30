@@ -28,7 +28,7 @@ function App() {
           <Route path="EdicaoLivro" element={<EdicaoLivro />} />
           <Route path="TelaEdicaoLivro" element={<TelaEdicaoLivro/>} />
           <Route path="EdicaoUsuario" element={<EdicaoUsuario />} />
-          <Route path="TelaEdicaoUsuario" element={<TelaEdicaoUsuario />} />
+          <Route path="TelaEdicaoUsuario/:id" element={<TelaEdicaoUsuario />} />
           <Route path="Cadastro" element={<Home />} />
           <Route path="CadastroLivro" element={<CadastroLivro />} />
           <Route path="CadastroUsuario" element={<CadastroUsuario />} />
