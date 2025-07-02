@@ -115,6 +115,7 @@ CREATE TABLE Reserva (
     id_locatario INT,
     Data_reserva DATE,
     Data_retorno DATE,
+    
     PRIMARY KEY (id_livro, id_locatario, Data_reserva),
     FOREIGN KEY (id_livro) REFERENCES Livro(id_livro) ON DELETE CASCADE,
     FOREIGN KEY (id_locatario) REFERENCES Locatario(id_locatario) ON DELETE CASCADE
