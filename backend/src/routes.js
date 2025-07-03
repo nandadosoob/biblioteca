@@ -3,6 +3,7 @@ const router = express.Router();
 const autorController = require('./controllers/Autor');
 const locatarioController = require('./controllers/Locatario');
 const categoriaController = require('./controllers/Categoria');
+const subcategoriaController = require('./controllers/SubCategoria');
 const livroController = require('./controllers/Livro')
 
 router.post('/autor',  autorController.create);
@@ -20,6 +21,15 @@ router.delete('/locatario/:id_locatario', locatarioController.remove);
 
 router.post('/categoria', categoriaController.create);
 router.get('/categoria', categoriaController.list);
+
+
+
+router.post('/', subcategoriaController.create);       // Criar subcategoria + associar
+router.get('/', subcategoriaController.list);          // Listar todas
+router.put('/:id_subcategoria', subcategoriaController.update);  // Atualizar
+router.delete('/:id_subcategoria', subcategoriaController.remove); // Deletar
+
+module.exports = router;
 
 
 router.post('/livro', livroController.create);
