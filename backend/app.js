@@ -18,6 +18,4 @@ app.get('', (req, res) => {
   res.send('Rota raiz sem caminho definido');
 });
 
-const subcategoriaRoutes = require('./routes/subcategoriaRoutes');
-app.use('/subcategorias', subcategoriaRoutes);
 

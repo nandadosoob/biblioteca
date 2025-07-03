@@ -24,20 +24,16 @@ router.get('/categoria', categoriaController.list);
 
 
 
-router.post('/', subcategoriaController.create);       // Criar subcategoria + associar
-router.get('/', subcategoriaController.list);          // Listar todas
-router.put('/:id_subcategoria', subcategoriaController.update);  // Atualizar
-router.delete('/:id_subcategoria', subcategoriaController.remove); // Deletar
-
-module.exports = router;
-
+router.post('/SubCategoria', subcategoriaController.create);       // Criar subcategoria + associar
+router.get('/SubCategoria', subcategoriaController.list);          // Listar todas
+router.put('/SubCategoria/:id_subcategoria', subcategoriaController.update);  // Atualizar
+router.delete('/SubCategoria/:id_subcategoria', subcategoriaController.remove); // Deletar
 
 router.post('/livro', livroController.create);
 router.get('/livro', livroController.list);
 router.get('/livro/:id_livro', livroController.get);
 router.put('/livro/:id_livro', livroController.update);   
 router.delete('/livro/:id_livro', livroController.remove);
-
 
 
 module.exports = router;
