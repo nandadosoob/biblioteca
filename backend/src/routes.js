@@ -3,6 +3,7 @@ const router = express.Router();
 const autorController = require('./controllers/Autor');
 const locatarioController = require('./controllers/Locatario');
 const categoriaController = require('./controllers/Categoria');
+const livroController = require('./controllers/Livro')
 
 router.post('/autor',  autorController.create);
 router.get('/autor',  autorController.list);
@@ -19,6 +20,14 @@ router.delete('/locatario/:id_locatario', locatarioController.remove);
 
 router.post('/categoria', categoriaController.create);
 router.get('/categoria', categoriaController.list);
+
+
+router.post('/livro', livroController.create);
+router.get('/livro', livroController.list);
+router.get('/livro/:id_livro', livroController.get);
+router.put('/livro/:id_livro', livroController.update);   
+router.delete('/livro/:id_livro', livroController.remove);
+
 
 
 module.exports = router;
