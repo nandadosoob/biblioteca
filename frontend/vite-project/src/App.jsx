@@ -13,6 +13,7 @@ import LayoutBase from './components/LayoutBase'
 import Login from './pages/Login/Login'
 import Historico from './pages/Historico/Historico';
 import CadastroAutor from './pages/Cadastro/CadastroAutor';
+import Dividas from './pages/Dividas/Dividas';
 
 
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="CadastroLivro" element={<CadastroLivro />} />
           <Route path="CadastroUsuario" element={<CadastroUsuario />} />
           <Route path="Historico" element={<Historico />} />
-          <Route path="Dividas" element={<Home />} />
+          <Route path="Dividas" element={<Dividas />} />
           <Route path="Emprestimo" element={<Emprestimo />} />
           <Route path="Autor" element={<CadastroAutor />} />
         </Route>

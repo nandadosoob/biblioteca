@@ -1,14 +1,15 @@
-.historico {
+.dividas-container {
   padding: 30px;
   font-family: Arial, sans-serif;
-  background-color: #fdfaf6;
+  background-color: #fdfaf6; /* igual do histórico */
   min-height: 100vh;
 }
 
-.historico h1 {
+.dividas-container h2 {
   margin-bottom: 20px;
   font-size: 28px;
   color: #333;
+  text-align: left;
 }
 
 table {
