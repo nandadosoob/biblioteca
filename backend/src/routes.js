@@ -28,15 +28,15 @@ router.put('/locatario/:id_locatario', locatarioController.update);
 router.delete('/locatario/:id_locatario', locatarioController.remove); 
 
 
-router.post('/categoria', categoriaController.create);
-router.get('/categoria', categoriaController.list);
-router.delete('/categoria/:id_categoria', categoriaController.delete)
+// router.post('/categoria', categoriaController.create);
+// router.get('/categoria', categoriaController.list);
+// router.delete('/categoria/:id_categoria', categoriaController.delete)
 
 
 
 
 router.post('/subcategoria', subcategoriaController.create);       
-router.get('/subcategoria', subcategoriaController.list);          
+// router.get('/subcategoria', subcategoriaController.list);          
 router.put('/subcategoria/:id_subcategoria', subcategoriaController.update);  
 router.delete('/subcategoria/:id_subcategoria', subcategoriaController.remove); 
 

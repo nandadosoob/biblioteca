@@ -56,9 +56,5 @@ async function remove(req, res) {
     }
 }
 
-module.exports = {
-    create,
-    list,
-    update,
-    remove
-};
+module.exports = { create, list, update, remove };
+// tirei get por enquanto

@@ -2,12 +2,14 @@ const dbConfig = require('../dbConfig');
 const pgPool = dbConfig.pgPool;
 
 
-async function create(titulo) {
-    const query = "INSERT INTO Livro (titulo) VALUES ($1)";
-    const values = [titulo];
+async function create(titulo, qtd_disponivel, edicao, isbn) {
+    const query = `
+        INSERT INTO Livro (titulo, qtd_disponivel, edicao, isbn)
+        VALUES ($1, $2, $3, $4)
+    `;
+    const values = [titulo, qtd_disponivel, edicao, isbn];
     try {
         await pgPool.query(query, values);
-        return;
     } catch (error) {
         console.error('Erro no create de Livro:', error.message);
         throw error;
@@ -15,7 +17,7 @@ async function create(titulo) {
 }
 
 async function list() {
-    const query = "SELECT id_livro, titulo FROM Livro ORDER BY id_livro";
+    const query = "SELECT id_livro, Titulo FROM Livro ORDER BY id_livro";
     try {
         const result = await pgPool.query(query);
         return result.rows;
@@ -37,7 +39,7 @@ async function get(id_livro) {
 }
 
 async function update(id_livro, titulo) {
-    const query = "UPDATE Livro SET titulo = $1 WHERE id_livro = $2";
+    const query = "UPDATE Livro SET Titulo = $1 WHERE id_livro = $2";
     const values = [titulo, id_livro];
     try {
         const result = await pgPool.query(query, values);

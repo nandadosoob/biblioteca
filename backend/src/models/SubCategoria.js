@@ -54,6 +54,8 @@ async function list() {
     }
 }
 
+
+
 // Atualiza o nome da subcategoria
 async function update(id_subcategoria, nome_subcategoria) {
     const query = `
@@ -81,10 +83,5 @@ async function remove(id_subcategoria) {
     }
 }
 
-module.exports = {
-    create,
-    associarCategoria,
-    list,
-    update,
-    remove
-};
+module.exports = {create:create, list:list, update:update, remove:remove};
+// tirei o get por enquanto
