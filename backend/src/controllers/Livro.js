@@ -52,7 +52,9 @@ const remove = async (req, res) => {
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ error: 'Erro ao remover o livro' });
-    }}
+    }
+};
+
 
 module.exports = {
     create,
