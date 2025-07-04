@@ -40,6 +40,10 @@ router.get('/livro/:id_livro', livroController.get);
 router.put('/livro/:id_livro', livroController.update);   
 router.delete('/livro/:id_livro', livroController.remove);
 
-
+router.post('/curso', cursoController.create);
+router.get('/curso', cursoController.list);
+router.get('/curso/:id_curso', cursoController.get);
+router.put('/curso/:id_curso', cursoController.update);
+router.delete('/curso/:id_curso', cursoController.remove);
 
 module.exports = router;
