@@ -1,54 +1,58 @@
-
 nav {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 20vw;
-    background-color: var(--light-brown);
-
-    
+  position: fixed; 
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 20vw;
+  background-color: var(--light-brown);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; 
+  z-index: 1000; 
 }
 
-
-nav a{
-    text-decoration: none;
-    color: var(--brown);
-    display: flex;
-    margin-top: 4%;
-    margin-bottom: 4%;
-    
+nav a {
+  text-decoration: none;
+  color: var(--brown);
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 8px 12px;
+  border-radius: 4px;
 }
 
-h3{
-    color: var(--brown);
+nav a:hover {
+  background-color: var(--medium-brown);
+  color: var(--black);
 }
 
-
-
-#divdescubra{
-    margin-bottom: 8%;
-    margin-left: 5%;
+#logo {
+  width: 60%;
+  align-self: center;
+  margin: 0 0 20px 0;
 }
 
-#adm{
-    margin-left: 5%;
-    display: flex;
-    flex-direction: column;
+nav::-webkit-scrollbar {
+  width: 6px;
 }
 
-#logo{
-    width: 60%;
-    align-self: center;
-    margin-top: -8%;
-    margin-bottom: -5%;
+nav::-webkit-scrollbar-thumb {
+  background-color: var(--medium-brown);
+  border-radius: 3px;
 }
 
-.icone{
-    margin-right: 8px;
-    color: var(--brown);
-    stroke: 2;
+.submenu-link {
+  margin-left: 20px; 
+  padding-left: 12px;
+  border-left: 3px solid var(--medium-brown); 
+  border-radius: 0 10px 10px 0;
+  transition: background-color 0.3s ease;
 }
 
-#bookSub, #userSub{
-    margin-left: 8%;
+.submenu-link:hover {
+  background-color: var(--medium-brown);
+  color: var(--black);
 }

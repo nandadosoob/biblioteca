@@ -4,7 +4,17 @@ const autorController = require('./controllers/Autor');
 const locatarioController = require('./controllers/Locatario');
 const categoriaController = require('./controllers/Categoria');
 const subcategoriaController = require('./controllers/SubCategoria');
-const livroController = require('./controllers/Livro')
+const livroController = require('./controllers/Livro');
+console.log('Controller LIVRO:', livroController);
+const cursoController = require('./controllers/Curso')
+
+
+router.post('/livro', livroController.create);
+router.get('/livro', livroController.list);
+router.get('/livro/:id_livro', livroController.get);
+router.put('/livro/:id_livro', livroController.update);   
+router.delete('/livro/:id_livro', livroController.remove);
+router.patch('/livro/:id_livro/reativar', livroController.reativar);
 
 router.post('/autor',  autorController.create);
 router.get('/autor',  autorController.list);
@@ -19,21 +29,29 @@ router.put('/locatario/:id_locatario', locatarioController.update);
 router.delete('/locatario/:id_locatario', locatarioController.remove); 
 
 
-router.post('/categoria', categoriaController.create);
-router.get('/categoria', categoriaController.list);
+// router.post('/categoria', categoriaController.create);
+// router.get('/categoria', categoriaController.list);
+// router.delete('/categoria/:id_categoria', categoriaController.delete)
 
 
 
-router.post('/SubCategoria', subcategoriaController.create);       // Criar subcategoria + associar
-router.get('/SubCategoria', subcategoriaController.list);          // Listar todas
-router.put('/SubCategoria/:id_subcategoria', subcategoriaController.update);  // Atualizar
-router.delete('/SubCategoria/:id_subcategoria', subcategoriaController.remove); // Deletar
-
-router.post('/livro', livroController.create);
-router.get('/livro', livroController.list);
-router.get('/livro/:id_livro', livroController.get);
-router.put('/livro/:id_livro', livroController.update);   
-router.delete('/livro/:id_livro', livroController.remove);
 
 
+router.post('/subcategoria', subcategoriaController.create);       
+// router.get('/subcategoria', subcategoriaController.list);          
+router.put('/subcategoria/:id_subcategoria', subcategoriaController.update);  
+router.delete('/subcategoria/:id_subcategoria', subcategoriaController.remove); 
+
+//>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
+
+
+
+
+router.post('/curso', cursoController.create);
+router.get('/curso', cursoController.list);
+router.get('/curso/:id_curso', cursoController.get);
+router.put('/curso/:id_curso', cursoController.update);
+router.delete('/curso/:id_curso', cursoController.remove);
+
+//>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
 module.exports = router;

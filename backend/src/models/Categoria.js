@@ -57,10 +57,4 @@ async function remove(id_categoria) {
     }
 }
 
-module.exports = {
-    create,
-    list,
-    get,
-    update,
-    remove
-};
+module.exports = {create:create, list:list, get:get, update:update, remove:remove};

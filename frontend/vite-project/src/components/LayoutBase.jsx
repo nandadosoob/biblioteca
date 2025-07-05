@@ -5,7 +5,7 @@ export default function LayoutBase() {
   return (
     <div style={{ display: "flex" }}>
       <Menu />
-      <div style={{ flex: 1, padding: "20px" }}>
+      <div style={{ flex: 1, padding: "20px", marginLeft: "20vw"}}>
         <Outlet />
       </div>
     </div>

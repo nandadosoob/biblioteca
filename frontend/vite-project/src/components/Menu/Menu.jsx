@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { IconSearch, IconPencil, IconCirclePlus, IconBook2, IconUserEdit, IconHistory, IconLibrary, IconBookmarks, IconMoon, IconSun } from '@tabler/icons-react';
+import { IconSearch, IconPencil, IconCirclePlus, IconBook2, IconUserEdit, IconHistory, IconLibrary, IconBookmarks, IconMoon } from '@tabler/icons-react';
 import React, { useState } from 'react'
 import './Menu.css'
 
@@ -11,28 +11,21 @@ export default function Menu() {
     }
 
     const [submenuCadas, setSubmenuCadas] = useState(false)
-
-
     const MostraSubMenuCadas = () => {
         setSubmenuCadas(!submenuCadas)
     }
 
     return (
         <div>
-
             <nav>
                 <img src="bibliotecLogoDFB.PNG" id='logo' />
                 <div id='divdescubra'>
                     <h3>Descubra</h3>
-
                     <NavLink to="/pesquisa">
                         <IconSearch className='icone' />
                         Pesquisar livro
                     </NavLink>
-
                 </div>
-
-
 
                 <div id='adm'>
                     <h3>Administração</h3>
@@ -43,15 +36,16 @@ export default function Menu() {
                     </NavLink>
 
                     {submenuEdit && (
-
-                        <><NavLink to="/EdicaoLivro" id='bookSub'>
-                            <IconBook2 className='icone' />
-                            Livros
-                        </NavLink>
-                        <NavLink to="/EdicaoUsuario" id='userSub'>
-                            <IconUserEdit className='icone' />
-                            Usuarios
-                        </NavLink></>
+                        <>
+                            <NavLink to="/EdicaoLivro" id='bookSub' className="submenu-link">
+                                <IconBook2 className='icone' />
+                                Livros
+                            </NavLink>
+                            <NavLink to="/EdicaoUsuario" id='userSub' className="submenu-link">
+                                <IconUserEdit className='icone' />
+                                Usuarios
+                            </NavLink>
+                        </>
                     )}
 
                     <NavLink onClick={MostraSubMenuCadas}>
@@ -60,44 +54,41 @@ export default function Menu() {
                     </NavLink>
 
                     {submenuCadas && (
-
-                        <><NavLink to="/CadastroLivro" id='bookSub'>
-                            <IconBook2 className='icone' />
-                            Livros
-                        </NavLink>
-                            <NavLink to="/CadastroUsuario" id='userSub'>
+                        <>
+                            <NavLink to="/CadastroLivro" id='bookSub' className="submenu-link">
+                                <IconBook2 className='icone' />
+                                Livros
+                            </NavLink>
+                            <NavLink to="/CadastroUsuario" id='userSub' className="submenu-link">
                                 <IconUserEdit className='icone' />
                                 Usuarios
-                            </NavLink></>
+                            </NavLink>
+                        </>
                     )}
 
-                            <NavLink to="/Historico">
-                            <IconHistory className='icone' />
-                            Histórico
-                            </NavLink>
+                    <NavLink to="/Historico">
+                        <IconHistory className='icone' />
+                        Histórico
+                    </NavLink>
 
-                            <NavLink to="/Dividas">
-                            <IconLibrary className='icone' />
-                            Dívidas
-                            </NavLink>
+                    <NavLink to="/Dividas">
+                        <IconLibrary className='icone' />
+                        Dívidas
+                    </NavLink>
 
-                            <NavLink to="/emprestimo">
-                                <IconBookmarks className='icone' />
-                                Emprestimo
-                            </NavLink>
-
+                    <NavLink to="/emprestimo">
+                        <IconBookmarks className='icone' />
+                        Emprestimo
+                    </NavLink>
                 </div>
 
                 <footer>
                     <button>
                         <IconMoon className='icone' />
-                        {/* <IconSun className='icone'/> */}
                         Moon
                     </button>
                 </footer>
-
             </nav>
         </div>
     )
 }
-

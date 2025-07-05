@@ -76,7 +76,7 @@ export default function CadastroUsuario() {
                 <input type="number" id="ra" value={ra} onChange={e => setRa(e.target.value)} />
 
 
-                <p>Tipo de usuário</p>
+                <p>Tipo de Usuário</p>
                 <select id="tipo" value={tipo} onChange={e => setTipo(e.target.value)} required>
                     <option value="Aluno">Aluno</option>
                     <option value="Professor">Professor</option>
@@ -96,14 +96,14 @@ export default function CadastroUsuario() {
 
                 <p>Curso</p>
                 <select id="curso" value={curso} onChange={e => setCurso(e.target.value)} required>
-                    <option value="1">bcc</option>
+                    <option value="1">BCC</option>
                 </select>
 
                 <p id="dataNascimento">Data de Nascimento</p>
                 <input type="date" id="dataNascimento" value={dataNascimento} onChange={e => setDataNascimento(e.target.value)} required
                 />
 
-                <p>email</p>
+                <p>E-Mail</p>
                 <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} required />
 
                 <p>Telefone</p>

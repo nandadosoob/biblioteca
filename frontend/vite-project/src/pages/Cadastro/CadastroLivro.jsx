@@ -80,7 +80,7 @@ export default function CadastroLivro() {
                     </div>
 
                     <div id="divBotoes">
-                        <button id="botaoCancela">Caancelar</button>
+                        <button id="botaoCancela">Cancelar</button>
                         <button id="botaoCadastra">Cadastrar</button>
 
                     </div>
