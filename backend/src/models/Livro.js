@@ -38,9 +38,16 @@ async function get(id_livro) {
     }
 }
 
-async function update(id_livro, titulo) {
-    const query = "UPDATE Livro SET Titulo = $1 WHERE id_livro = $2";
-    const values = [titulo, id_livro];
+async function update(id_livro, titulo, qtd_disponivel, edicao, isbn) {
+    const query = `
+        UPDATE Livro
+        SET titulo = $1,
+            qtd_disponivel = $2,
+            edicao = $3,
+            isbn = $4
+        WHERE id_livro = $5
+    `;
+    const values = [titulo, qtd_disponivel, edicao, isbn, id_livro];
     try {
         const result = await pgPool.query(query, values);
         return result.rowCount;
@@ -50,20 +57,43 @@ async function update(id_livro, titulo) {
     }
 }
 
+
 async function remove(id_livro) {
-    const query = "DELETE FROM Livro WHERE id_livro = $1";
-    try {
-        await pgPool.query(query, [id_livro]);
-    } catch (error) {
-        console.error('Erro no remove da Livro:', error.message);
-        throw error;
-    }
+  const query = `
+    UPDATE Livro
+    SET ativo = FALSE
+    WHERE id_livro = $1
+  `;
+  try {
+    const result = await pgPool.query(query, [id_livro]);
+    return result.rowCount;
+  } catch (error) {
+    console.error('Erro ao marcar livro como indisponível:', error.message);
+    throw error;
+  }
 }
+
+async function reativar(id_livro) {
+  const query = `
+    UPDATE Livro
+    SET ativo = TRUE
+    WHERE id_livro = $1
+  `;
+  try {
+    const result = await pgPool.query(query, [id_livro]);
+    return result.rowCount;
+  } catch (error) {
+    console.error('Erro ao reativar livro:', error.message);
+    throw error;
+  }
+}
+
 
 module.exports = {
     create,
     list,
     get,
     update,
-    remove
+    remove,
+    reativar
 };

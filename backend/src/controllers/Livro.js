@@ -49,17 +49,30 @@ const remove = async (req, res) => {
     const { id_livro } = req.params;
     try {
         await modelLivro.remove(id_livro);
-        res.status(204).send();
+        res.status(204).send('Livro Desativado');
     } catch (error) {
         res.status(500).json({ error: 'Erro ao remover o livro' });
     }
 };
 
+const reativar = async (req, res) => {
+  const { id_livro } = req.params;
+  try {
+    const result = await modelLivro.reativar(id_livro);
+    if (result === 0) {
+      return res.status(404).json({ error: 'Livro não encontrado' });
+    }
+    res.status(200).json({ message: 'Livro reativado com sucesso' });
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao reativar livro' });
+  }
+};
 
 module.exports = {
     create,
     list,
     get,
     update,
-    remove
+    remove,
+    reativar
 };

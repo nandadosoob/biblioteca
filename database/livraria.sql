@@ -52,7 +52,8 @@ CREATE TABLE Livro (
     Titulo VARCHAR(255) NOT NULL,
     Qtd_disponivel INT NOT NULL,
     Edicao VARCHAR(50),
-    ISBN VARCHAR(20) UNIQUE
+    ISBN VARCHAR(20) UNIQUE,
+    Ativo BOOLEAN DEFAULT TRUE
 );
 
 -- Tabela de Relação Autores e Livros
