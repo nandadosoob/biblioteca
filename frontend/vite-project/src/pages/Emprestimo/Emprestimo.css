@@ -149,7 +149,7 @@ h2 {
   gap: 20px;
 }
 
-.imglivro img {
+#uploadImagem {
   height: 300px;
   width: 200px;
   border-radius: 12px;
@@ -290,3 +290,4 @@ h2 {
     width: 100%;
   }
 }
+

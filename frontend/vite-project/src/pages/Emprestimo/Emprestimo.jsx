@@ -4,6 +4,15 @@ import { IconCalendar, IconBook } from "@tabler/icons-react";
 
 export default function Emprestimo() {
   const [abaAtiva, setAbaAtiva] = useState('status');
+  const [imagem, setImagem] = useState(null);
+
+  const handleImagemChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setImagem(url);
+    }
+  };
 
   return (
     <div className="pagina-emprestimo">
@@ -30,9 +39,6 @@ export default function Emprestimo() {
               <label htmlFor="locatario">Locatário</label>
               <input type="text" name="locatario" id="locatario" />
 
-              <label>Leitor (a) | Registro Acadêmico</label>
-              <input type="text" />
-
               <label><IconCalendar /> Data</label>
               <input type="text" />
 
@@ -42,13 +48,19 @@ export default function Emprestimo() {
                 <label><input id="bibliotecario" type="checkbox" /> Bibliotecário</label>
                 <label><input id="aluno" type="checkbox" /> Aluno</label>
               </div>
+
             </div>
 
             <div className="imglivro">
-              <img
-                src="https://m.media-amazon.com/images/I/61JenSx3wKL._AC_UF1000,1000_QL80_.jpg"
-                alt="Capa do Livro"
+              {/* Input de imagem */}
+              <label htmlFor="uploadImagem">Escolha uma capa</label>
+              <input
+                type="file"
+                accept="image/*"
+                id="uploadImagem"
+                onChange={handleImagemChange}
               />
+              
               <div className="buttons">
                 <button className="um">Salvar</button>
                 <button className="dois">Cancelar</button>
@@ -79,7 +91,7 @@ export default function Emprestimo() {
                 </tr>
               </thead>
               <tbody>
-                /*conteúdo do histórico */
+                {/* conteúdo do histórico */}
               </tbody>
             </table>
           </div>
