@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const autorController = require('./controllers/Autor');
 const locatarioController = require('./controllers/Locatario');
+const dividaController = require('./controllers/Divida');
+const reservaController = require('./controllers/Reserva');
 const categoriaController = require('./controllers/Categoria');
 const subcategoriaController = require('./controllers/SubCategoria');
 const livroController = require('./controllers/Livro');
-console.log('Controller LIVRO:', livroController);
+// console.log('Controller LIVRO:', livroController);
 const cursoController = require('./controllers/Curso')
 
 
@@ -27,6 +29,18 @@ router.get('/locatario',  locatarioController.list);
 router.get('/locatario/:id_locatario', locatarioController.get);
 router.put('/locatario/:id_locatario', locatarioController.update);   
 router.delete('/locatario/:id_locatario', locatarioController.remove); 
+
+router.post('/divida',  dividaController.create);
+router.get('/divida',  dividaController.list);
+router.get('/divida/:id_divida', dividaController.get);
+router.put('/divida/:id_divida', dividaController.update);   
+router.delete('/divida/:id_divida', dividaController.remove); 
+
+router.post('/reserva',  reservaController.create);
+router.get('/reserva',  reservaController.list);
+router.get('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.get);
+router.put('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.update);   
+router.delete('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.remove); 
 
 
 // router.post('/categoria', categoriaController.create);
