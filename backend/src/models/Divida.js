@@ -18,7 +18,7 @@ async function create(id_locatario, id_livro, data_reserva, estado, valor, data_
 
 // Função responsável por listar dividas
 async function list(){
-    const query = "SELECT * FROM divida";
+    const query = "SELECT d.id_divida, d.data_reserva, d.data_divida, d.estado, d.valor, l.nome_locatario FROM divida d JOIN locatario l ON l.id_locatario = d.id_locatario";
     try {
         let divida = await pgPool.query(query);
         return divida.rows;
