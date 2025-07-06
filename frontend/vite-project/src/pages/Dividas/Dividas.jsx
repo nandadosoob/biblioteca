@@ -15,7 +15,7 @@ export default function Dividas() {
         <thead>
           <tr>
             <th>Nome</th>
-            <th>Valor (R$)</th>
+            <th>Data Retirada</th>
             <th>Data de Vencimento</th>
             <th>Status</th>
           </tr>
@@ -24,7 +24,7 @@ export default function Dividas() {
           {dividas.map(divida => (
             <tr key={divida.id} className={divida.status === 'Quitada' ? 'quitada' : 'pendente'}>
               <td>{divida.nome}</td>
-              <td>{divida.valor.toFixed(2)}</td>
+              <td>{new Date(divida.data).toLocaleDateString()}</td>
               <td>{new Date(divida.data).toLocaleDateString()}</td>
               <td>{divida.status}</td>
             </tr>

@@ -1,4 +1,3 @@
-// === CONTROLLER de Curso ===
 const modelCurso = require('../models/Curso');
 
 async function create(req, res) {

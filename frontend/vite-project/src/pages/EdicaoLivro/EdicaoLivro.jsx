@@ -1,53 +1,49 @@
-import React from "react"
-import { Link } from 'react-router-dom'
-import './EdicaoLivro.css'
+import React from "react";
+import { Link } from 'react-router-dom';
+import './EdicaoLivro.css';
 import { IconBook, IconTrash, IconPencil } from '@tabler/icons-react';
-
-
 
 const EdicaoLivro = () => {
   return (
-    <div>
-      <div id="main1">
+    <div className="pagina-edicao">
+      <div className="barra-pesquisa">
+        <input
+          type="text"
+          placeholder="Pesquise o livro que deseja editar..."
+        />
+        <button className="btn-pesquisar">
+          <IconBook size={20} />
+        </button>
+      </div>
 
-        <div className="barra-pesquisa-container">
-          <input id="barrapesquisa" type="text" placeholder="Pesquise aqui o livro que você deseja editar" />
-          <button><IconBook></IconBook></button>
+      <div className="cabecalho-lista">
+        <span className="cabecalho-livro">Livro</span>
+        <span className="cabecalho-acao">Editar</span>
+        <span className="cabecalho-acao">Excluir</span>
+      </div>
+
+      <div className="livro-item">
+        <div className="livro-img">
+          <img src="https://via.placeholder.com/120x180" alt="Capa do livro" />
         </div>
-
-        <div id="classificacaoLivro">
-          <p id="bk">Livro</p>
-          <p id="edit">Editar</p>
-          <p id="del">Excluir</p>
-
+        <div className="livro-info">
+          <h4>Título do Livro</h4>
+          <p>Autor: Fulano da Silva</p>
+          <p>Editora: Exemplo Editora</p>
         </div>
-
-        <div id="listaLivros">
-          <div className="item1">
-            <div id="imge">
-              <img src="" alt="" />
-
-            </div>
-            <div id="informacoesLivro">
-              <h4>titulo</h4>
-              <p id="dadosLivro">dados</p>
-            </div>
-            <div id="botoes">
-              <Link to="/TelaEdicaoLivro" id="link">
-                <button id="botaoEditar" ><IconPencil className="iconeEdit" />
-                </button>
-              </Link>
-
-              <button id="botaoExcluir"><IconTrash className="iconeEdit" /></button>
-
-            </div>
-          </div>
+        <div className="livro-acoes">
+          <Link to="/TelaEdicaoLivro">
+            <button className="btn-editar">
+              <IconPencil size={18} />
+            </button>
+          </Link>
+          <button className="btn-excluir">
+            <IconTrash size={18} />
+          </button>
         </div>
-
-
       </div>
     </div>
   );
-}
+};
 
 export default EdicaoLivro;
