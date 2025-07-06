@@ -9,6 +9,8 @@ const subcategoriaController = require('./controllers/SubCategoria');
 const livroController = require('./controllers/Livro');
 // console.log('Controller LIVRO:', livroController);
 const cursoController = require('./controllers/Curso')
+const editoraController = require('./controllers/Editora');
+
 
 
 router.post('/livro', livroController.create);
@@ -17,7 +19,6 @@ router.get('/livro/:id_livro', livroController.get);
 router.put('/livro/:id_livro', livroController.update);   
 router.delete('/livro/:id_livro', livroController.remove);
 router.patch('/livro/:id_livro/reativar', livroController.reativar);
-
 router.post('/autor',  autorController.create);
 router.get('/autor',  autorController.list);
 router.get('/autor/:id_autor', autorController.get);
@@ -68,4 +69,12 @@ router.put('/curso/:id_curso', cursoController.update);
 router.delete('/curso/:id_curso', cursoController.remove);
 
 //>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
+
+router.post('/editora', editoraController.create);
+router.get('/editora', editoraController.list);
+router.get('/editora/:id_editora', editoraController.get);
+router.put('/editora/:id_editora', editoraController.update);
+router.delete('/editora/:id_editora', editoraController.remove);
+
 module.exports = router;
+
