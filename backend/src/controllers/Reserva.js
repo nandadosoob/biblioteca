@@ -1,39 +1,60 @@
-// chmar função qtdEmprestimos ATivo, e armazenar variavel
-
-// async function cadastrarReserva(params) {
-//     livro,locatario, datas 
-//     // locatario retorna o tipo .tipo if se a qtd de empresi+timos desse tipo é maior ou menor q o numero q ele pode reservar
-//     // passando o id qm é o usuario, retornar qtd de mprestimo ativo, get do livro
-
-    
-// }
-
 const modelReserva = require('../models/Reserva');
+const modelLocatario = require('../models/Locatario'); // Você precisa dessa função
+const { calcularDataRetorno } = require('../utils/data');
 
+// Criar nova reserva
 async function create(req, res) {
-  const {id_livro, id_locatario, data_reserva, data_retorno} = req.body;
+  const { id_livro, id_locatario, data_reserva } = req.body;
 
-  if (!id_livro || !id_locatario || !data_reserva || !data_retorno) {
-    return res.status(400).json({ error: 'Campos obrigatórios: id_livro, id_locatario, data_reserva, data_retorno' });
+  if (!id_livro || !id_locatario || !data_reserva) {
+    return res.status(400).json({
+      error: 'Campos obrigatórios: id_livro, id_locatario, data_reserva',
+    });
   }
 
   try {
-    await modelReserva.create(id_livro, id_locatario, data_reserva, data_retorno);
-    res.status(201).json({ message: 'Reserva criada com sucesso' });
+    // 1. Obter tipo do locatário (aluno ou professor)
+    const locatario = await modelLocatario.getById(id_locatario);
+    if (!locatario) return res.status(404).json({ error: 'Locatário não encontrado' });
+
+    const tipo = locatario.tipo;
+
+    // 2. Verificar quantidade de reservas ativas
+    const qtdReservasAtivas = await modelReserva.quantidadeReservasAtivasPorUsuario(id_locatario);
+    const limite = tipo === 'aluno' ? 3 : 5;
+
+    if (qtdReservasAtivas >= limite) {
+      return res.status(403).json({
+        error: `Usuário do tipo ${tipo} já atingiu o limite de ${limite} reservas ativas.`,
+      });
+    }
+
+    // 3. Calcular a data de retorno com base no tipo do usuário
+    const data_retorno = calcularDataRetorno(tipo, data_reserva);
+
+    // 4. Criar reserva com data_entrega como null (ainda não devolvido)
+    await modelReserva.create(id_livro, id_locatario, data_reserva, null);
+
+    res.status(201).json({
+      message: 'Reserva criada com sucesso',
+      data_retorno,
+    });
   } catch (error) {
     console.error('Erro no create do controller Reserva:', error.message);
     res.status(500).json({ error: 'Erro ao criar reserva' });
   }
 }
 
+
 async function list(req, res) {
   try {
     const reservas = await modelReserva.list();
-    res.status(200).json({reservas});
+    res.status(200).json({ reservas });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao listar reservas' });
   }
 }
+
 
 async function get(req, res) {
   const { id_livro, id_locatario, data_reserva } = req.params;
@@ -41,6 +62,7 @@ async function get(req, res) {
   try {
     const reserva = await modelReserva.get(id_livro, id_locatario, data_reserva);
     if (!reserva) return res.status(404).json({ error: 'Reserva não encontrada' });
+
     res.status(200).json({ reserva });
   } catch (error) {
     res.status(500).json({ error: 'Erro ao buscar reserva' });
@@ -48,19 +70,23 @@ async function get(req, res) {
 }
 
 async function update(req, res) {
-  const {id_livro, id_locatario, data_reserva} = req.params;
-  const {data_retorno} = req.body;
+  const { id_livro, id_locatario, data_reserva } = req.params;
+  const { data_retorno } = req.body;
 
-  if (!data_retorno) return res.status(400).json({ error: 'Data de retorno obrigatória para atualizar' });
+  if (!data_retorno) {
+    return res.status(400).json({ error: 'Data de retorno obrigatória para atualizar' });
+  }
 
   try {
     const updatedCount = await modelReserva.update(id_livro, id_locatario, data_reserva, data_retorno);
     if (updatedCount === 0) return res.status(404).json({ error: 'Reserva não encontrada' });
-    res.status(200).json({message: 'Reserva atualizada com sucesso'});
+
+    res.status(200).json({ message: 'Reserva atualizada com sucesso' });
   } catch (error) {
-    res.status(500).json({error: 'Erro ao atualizar reserva'});
+    res.status(500).json({ error: 'Erro ao atualizar reserva' });
   }
 }
+
 
 async function remove(req, res) {
   const { id_livro, id_locatario, data_reserva } = req.params;

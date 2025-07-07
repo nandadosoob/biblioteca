@@ -65,5 +65,17 @@ async function remove(id_locatario) {
     }
 }
 
+async function getById(id_locatario) {
+  const query = "SELECT * FROM locatario WHERE id_locatario = $1";
+  try {
+    const result = await pgPool.query(query, [id_locatario]);
+    return result.rows[0];
+  } catch (error) {
+    console.error('Erro no getById do locatario:', error.message);
+    throw error;
+  }
+}
 
-module.exports = {create:create, list:list, get:get, update:update, remove:remove};
+
+
+module.exports = {create:create, list:list, get:get, update:update, remove:remove, getById};
