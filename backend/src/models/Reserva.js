@@ -70,6 +70,7 @@ async function remove(id_livro, id_locatario, data_reserva) {
     const query = "DELETE FROM reserva WHERE id_livro = $1 AND id_locatario = $2 AND data_reserva = $3";
     try {
         await pgPool.query(query, [id_livro, id_locatario, data_reserva]);
+        console.log('Reserva Removida')
     } catch (error) {
         console.error('Erro no remove do reserva:', error.message);
         throw error;
@@ -104,7 +105,7 @@ async function calcularMulta(id_livro, id_locatario, data_reserva) {
         const dataEntrega = new Date(reserva.data_entrega);
 
         const diffEmMs = dataEntrega - dataRetorno;
-        const diasAtraso = Math.floor(diffEmMs / (1000 * 60 * 60 * 24));
+        const diasAtraso = Math.ceil(diffEmMs / (1000 * 60 * 60 * 24));
 
         return diasAtraso > 0 ? diasAtraso * 1 : 0;
     } catch (error) {

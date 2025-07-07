@@ -104,11 +104,20 @@ async function registrarEntrega(req, res) {
 
   try {
     const updatedCount = await modelReserva.registrarEntrega(id_livro, id_locatario, data_reserva, data_entrega);
+    
     if (updatedCount === 0) {
       return res.status(404).json({ error: 'Reserva não encontrada' });
     }
 
-    res.status(200).json({ message: 'Data de entrega registrada com sucesso' });
+    // Calcula a multa após atualizar a entrega
+    const multa = await modelReserva.calcularMulta(id_livro, id_locatario, data_reserva);
+
+    res.status(200).json({
+      message: 'Data de entrega registrada com sucesso',
+      atraso_em_dias: multa > 0 ? multa : 0,
+      multa: `R$ ${multa.toFixed(2)}`
+    });
+
   } catch (error) {
     console.error('Erro ao registrar entrega:', error.message);
     res.status(500).json({ error: 'Erro interno ao registrar entrega' });
@@ -134,7 +143,9 @@ async function remove(req, res) {
 
   try {
     await modelReserva.remove(id_livro, id_locatario, data_reserva);
-    res.status(204).send();
+    res.status(204).json({
+      message: 'Reserva removida com sucesso',
+    })
   } catch (error) {
     res.status(500).json({ error: 'Erro ao remover reserva' });
   }
