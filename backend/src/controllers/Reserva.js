@@ -115,6 +115,18 @@ async function registrarEntrega(req, res) {
   }
 }
 
+async function multa(req, res) {
+  const { id_livro, id_locatario, data_reserva } = req.params;
+
+  try {
+    const valorMulta = await modelReserva.calcularMulta(id_livro, id_locatario, data_reserva);
+    res.status(200).json({ multa: `R$ ${valorMulta.toFixed(2)}` });
+  } catch (error) {
+    console.error("Erro ao calcular multa:", error.message);
+    res.status(500).json({ error: "Erro ao calcular multa" });
+  }
+}
+
 
 
 async function remove(req, res) {
@@ -128,4 +140,4 @@ async function remove(req, res) {
   }
 }
 
-module.exports = { create, list, get, update, registrarEntrega , remove};
+module.exports = { create, list, get, update, registrarEntrega , multa, remove};

@@ -88,6 +88,32 @@ async function quantidadeReservasAtivasPorUsuario(id_locatario) {
     }
 }
 
+// Calcula multa por atraso
+async function calcularMulta(id_livro, id_locatario, data_reserva) {
+    const query = `
+        SELECT data_retorno, data_entrega
+        FROM reserva
+        WHERE id_livro = $1 AND id_locatario = $2 AND data_reserva = $3
+    `;
+    try {
+        const result = await pgPool.query(query, [id_livro, id_locatario, data_reserva]);
+        const reserva = result.rows[0];
+        if (!reserva || !reserva.data_retorno || !reserva.data_entrega) return 0;
+
+        const dataRetorno = new Date(reserva.data_retorno);
+        const dataEntrega = new Date(reserva.data_entrega);
+
+        const diffEmMs = dataEntrega - dataRetorno;
+        const diasAtraso = Math.floor(diffEmMs / (1000 * 60 * 60 * 24));
+
+        return diasAtraso > 0 ? diasAtraso * 1 : 0;
+    } catch (error) {
+        console.error('Erro ao calcular multa:', error.message);
+        throw error;
+    }
+}
+
+
 // Conta quantas vezes um livro está reservado no momento
 // async function quantidadeReservasAtivasPorLivro(id_livro) {
 //     const query = "SELECT COUNT(*) FROM reserva WHERE id_livro = $1 AND data_entrega IS NULL";
@@ -108,5 +134,6 @@ module.exports = {
     registrarEntrega,
     remove,
     quantidadeReservasAtivasPorUsuario,
+    calcularMulta
     // quantidadeReservasAtivasPorLivro
 };
