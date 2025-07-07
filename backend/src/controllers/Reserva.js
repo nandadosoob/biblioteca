@@ -2,6 +2,8 @@ const modelReserva = require('../models/Reserva');
 const modelLocatario = require('../models/Locatario'); // Você precisa dessa função
 const { calcularDataRetorno } = require('../utils/data');
 
+
+
 // Criar nova reserva
 async function create(req, res) {
   const { id_livro, id_locatario, data_reserva } = req.body;
@@ -15,7 +17,9 @@ async function create(req, res) {
   try {
     // 1. Obter tipo do locatário (aluno ou professor)
     const locatario = await modelLocatario.getById(id_locatario);
-    if (!locatario) return res.status(404).json({ error: 'Locatário não encontrado' });
+    if (!locatario) {
+      return res.status(404).json({ error: 'Locatário não encontrado' });
+    }
 
     const tipo = locatario.tipo;
 
@@ -32,13 +36,16 @@ async function create(req, res) {
     // 3. Calcular a data de retorno com base no tipo do usuário
     const data_retorno = calcularDataRetorno(tipo, data_reserva);
 
-    // 4. Criar reserva com data_entrega como null (ainda não devolvido)
-    await modelReserva.create(id_livro, id_locatario, data_reserva, null);
+    // 4. Criar reserva com data_entrega como null (ainda não devolvido) e com data_retorno
+    await modelReserva.create(id_livro, id_locatario, data_reserva, null, data_retorno);
 
+
+    // 5. Retornar resposta com data_retorno
     res.status(201).json({
       message: 'Reserva criada com sucesso',
       data_retorno,
     });
+
   } catch (error) {
     console.error('Erro no create do controller Reserva:', error.message);
     res.status(500).json({ error: 'Erro ao criar reserva' });
@@ -87,6 +94,28 @@ async function update(req, res) {
   }
 }
 
+async function registrarEntrega(req, res) {
+  const { id_livro, id_locatario, data_reserva } = req.params;
+  const { data_entrega } = req.body;
+
+  if (!data_entrega) {
+    return res.status(400).json({ error: 'Data de entrega obrigatória para atualizar' });
+  }
+
+  try {
+    const updatedCount = await modelReserva.registrarEntrega(id_livro, id_locatario, data_reserva, data_entrega);
+    if (updatedCount === 0) {
+      return res.status(404).json({ error: 'Reserva não encontrada' });
+    }
+
+    res.status(200).json({ message: 'Data de entrega registrada com sucesso' });
+  } catch (error) {
+    console.error('Erro ao registrar entrega:', error.message);
+    res.status(500).json({ error: 'Erro interno ao registrar entrega' });
+  }
+}
+
+
 
 async function remove(req, res) {
   const { id_livro, id_locatario, data_reserva } = req.params;
@@ -99,4 +128,4 @@ async function remove(req, res) {
   }
 }
 
-module.exports = { create, list, get, update, remove };
+module.exports = { create, list, get, update, registrarEntrega , remove};

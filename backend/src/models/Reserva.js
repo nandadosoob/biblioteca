@@ -2,9 +2,12 @@ const dbConfig = require('../dbConfig');
 const pgPool = dbConfig.pgPool;
 
 // Cria uma nova reserva
-async function create(id_livro, id_locatario, data_reserva, data_entrega = null) {
-    const query = "INSERT INTO reserva (id_livro, id_locatario, data_reserva, data_entrega) VALUES ($1, $2, $3, $4)";
-    const values = [id_livro, id_locatario, data_reserva, data_entrega];
+async function create(id_livro, id_locatario, data_reserva, data_entrega = null, data_retorno = null) {
+    const query = `
+        INSERT INTO reserva (id_livro, id_locatario, data_reserva, data_entrega, data_retorno)
+        VALUES ($1, $2, $3, $4, $5)
+    `;
+    const values = [id_livro, id_locatario, data_reserva, data_entrega, data_retorno];
     try {
         await pgPool.query(query, values);
     } catch (error) {
@@ -12,6 +15,7 @@ async function create(id_livro, id_locatario, data_reserva, data_entrega = null)
         throw error;
     }
 }
+
 
 // Retorna todas as reservas
 async function list() {

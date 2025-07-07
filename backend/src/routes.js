@@ -40,8 +40,10 @@ router.delete('/divida/:id_divida', dividaController.remove);
 router.post('/reserva',  reservaController.create);
 router.get('/reserva',  reservaController.list);
 router.get('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.get);
-router.put('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.update);   
+router.put('/reserva/:id_livro/:id_locatario/:data_reserva/entrega', reservaController.registrarEntrega);  
+router.put('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.update); 
 router.delete('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.remove); 
+
 
 
 // router.post('/categoria', categoriaController.create);
