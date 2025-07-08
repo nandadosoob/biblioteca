@@ -1,21 +1,23 @@
 const modelReserva = require('../models/Reserva');
 const modelLocatario = require('../models/Locatario'); // Você precisa dessa função
 const { calcularDataRetorno } = require('../utils/data');
+const modelLivro = require('../models/Livro')
 
 
 
-// Criar nova reserva
+
 async function create(req, res) {
   const { id_livro, id_locatario, data_reserva } = req.body;
 
   if (!id_livro || !id_locatario || !data_reserva) {
     return res.status(400).json({
+      // 1.
       error: 'Campos obrigatórios: id_livro, id_locatario, data_reserva',
     });
   }
 
   try {
-    // 1. Obter tipo do locatário (aluno ou professor)
+    // 2. Obter tipo do locatário (aluno ou professor)
     const locatario = await modelLocatario.getById(id_locatario);
     if (!locatario) {
       return res.status(404).json({ error: 'Locatário não encontrado' });
@@ -23,7 +25,7 @@ async function create(req, res) {
 
     const tipo = locatario.tipo;
 
-    // 2. Verificar quantidade de reservas ativas
+    // 3. Verificar quantidade de reservas ativas
     const qtdReservasAtivas = await modelReserva.quantidadeReservasAtivasPorUsuario(id_locatario);
     const limite = tipo === 'aluno' ? 3 : 5;
 
@@ -33,14 +35,37 @@ async function create(req, res) {
       });
     }
 
-    // 3. Calcular a data de retorno com base no tipo do usuário
+    // 4. Verificar disponibilidade do livro
+    const livro = await modelLivro.getById(id_livro); // certifique-se que modelLivro está importado
+
+    // if (!livro) {
+    //   return res.status(404).json({ error: 'Livro não encontrado' });
+    // }
+
+    if (!livro || livro.ativo === false) {
+      return res.status(400).json({ error: 'Livro inativo ou inexistente' });
+  }
+
+    if (livro.qtd_disponivel <= 0) {
+    return res.status(400).json({ error: 'Livro sem exemplares disponíveis' });
+  
+  }
+  // Verificar se já atingiu o limite de reservas para esse livro
+    const reservasAtivasLivro = await modelReserva.quantidadeReservasAtivasPorLivro(id_livro);
+
+    if (reservasAtivasLivro >= livro.qtd_disponivel) {
+      return res.status(403).json({
+      error: `Todos os exemplares do livro "${livro.titulo}" estão reservados no momento. Aguarde uma devolução.`,
+      });
+  }
+
+    // 5. Calcular data de retorno
     const data_retorno = calcularDataRetorno(tipo, data_reserva);
 
-    // 4. Criar reserva com data_entrega como null (ainda não devolvido) e com data_retorno
+    // 6. Criar reserva
     await modelReserva.create(id_livro, id_locatario, data_reserva, null, data_retorno);
 
-
-    // 5. Retornar resposta com data_retorno
+    // 7. Retornar sucesso
     res.status(201).json({
       message: 'Reserva criada com sucesso',
       data_retorno,

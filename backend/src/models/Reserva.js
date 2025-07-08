@@ -1,6 +1,7 @@
 const dbConfig = require('../dbConfig');
 const pgPool = dbConfig.pgPool;
 
+
 // Cria uma nova reserva
 async function create(id_livro, id_locatario, data_reserva, data_entrega = null, data_retorno = null) {
     const query = `
@@ -116,16 +117,16 @@ async function calcularMulta(id_livro, id_locatario, data_reserva) {
 
 
 // Conta quantas vezes um livro está reservado no momento
-// async function quantidadeReservasAtivasPorLivro(id_livro) {
-//     const query = "SELECT COUNT(*) FROM reserva WHERE id_livro = $1 AND data_entrega IS NULL";
-//     try {
-//         const result = await pgPool.query(query, [id_livro]);
-//         return parseInt(result.rows[0].count);
-//     } catch (error) {
-//         console.error('Erro ao contar reservas ativas do livro:', error.message);
-//         throw error;
-//     }
-// }
+async function quantidadeReservasAtivasPorLivro(id_livro) {
+    const query = "SELECT COUNT(*) FROM reserva WHERE id_livro = $1 AND data_entrega IS NULL";
+    try {
+        const result = await pgPool.query(query, [id_livro]);
+        return parseInt(result.rows[0].count);
+    } catch (error) {
+        console.error('Erro ao contar reservas ativas do livro:', error.message);
+        throw error;
+    }
+}
 
 module.exports = {
     create,
@@ -135,6 +136,6 @@ module.exports = {
     registrarEntrega,
     remove,
     quantidadeReservasAtivasPorUsuario,
-    calcularMulta
-    // quantidadeReservasAtivasPorLivro
+    calcularMulta,
+    quantidadeReservasAtivasPorLivro
 };

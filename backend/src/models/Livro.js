@@ -134,11 +134,25 @@ async function reativar(id_livro) {
 }
 
 
+async function getById(id_livro) {
+  const query = "SELECT * FROM livro WHERE id_livro = $1";
+  try {
+    const result = await pgPool.query(query, [id_livro]);
+    return result.rows[0];
+  } catch (error) {
+    console.error('Erro ao buscar livro:', error.message);
+    throw error;
+  }
+}
+
+
+
 module.exports = {
     create,
     list,
     get,
     update,
     remove,
-    reativar
+    reativar,
+    getById
 };
