@@ -19,6 +19,7 @@ router.get('/livro/:id_livro', livroController.get);
 router.put('/livro/:id_livro', livroController.update);   
 router.delete('/livro/:id_livro', livroController.remove);
 router.patch('/livro/:id_livro/reativar', livroController.reativar);
+
 router.post('/autor',  autorController.create);
 router.get('/autor',  autorController.list);
 router.get('/autor/:id_autor', autorController.get);
