@@ -14,6 +14,17 @@ async function create(nome_subcategoria) {
     }
 }
 
+async function get(id_subcategoria) {
+    const query = "SELECT * FROM Subcategoria WHERE id_subcategoria = $1";
+    try {
+        const result = await pgPool.query(query, [id_subcategoria]);
+        return result.rows[0];
+    } catch (error) {
+        console.error('Erro no get de  subcategoria:', error.message);
+        throw error;
+    }
+}
+
 // Associa subcategoria a uma categoria
 async function associarCategoria(id_categoria, id_subcategoria) {
     const query = `
@@ -83,5 +94,5 @@ async function remove(id_subcategoria) {
     }
 }
 
-module.exports = {create:create, list:list, update:update, remove:remove};
+module.exports = {create:create, list:list, get:get, update:update, remove:remove, associarCategoria:associarCategoria};
 // tirei o get por enquanto

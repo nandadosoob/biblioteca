@@ -5,9 +5,8 @@ const locatarioController = require('./controllers/Locatario');
 const dividaController = require('./controllers/Divida');
 const reservaController = require('./controllers/Reserva');
 const categoriaController = require('./controllers/Categoria');
-const subcategoriaController = require('./controllers/SubCategoria');
+const subcategoriaController = require('./controllers/SubCategoria')
 const livroController = require('./controllers/Livro');
-// console.log('Controller LIVRO:', livroController);
 const cursoController = require('./controllers/Curso')
 const editoraController = require('./controllers/Editora');
 
@@ -47,20 +46,19 @@ router.put('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.u
 router.delete('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.remove); 
 
 
-// router.post('/categoria', categoriaController.create);
-// router.get('/categoria', categoriaController.list);
-// router.delete('/categoria/:id_categoria', categoriaController.delete)
-
-
-
+router.post('/categoria', categoriaController.create);
+router.get('/categoria', categoriaController.list);
+router.get('/categoria/:id_categoria', categoriaController.get)
+router.delete('/categoria/:id_categoria', categoriaController.remove)
+router.put('/categoria/:id_categoria', categoriaController.update)
 
 
 router.post('/subcategoria', subcategoriaController.create);       
-// router.get('/subcategoria', subcategoriaController.list);          
+router.get('/subcategoria', subcategoriaController.list);      
+router.get('/subcategoria/:id_subcategoria', subcategoriaController.get);      
 router.put('/subcategoria/:id_subcategoria', subcategoriaController.update);  
 router.delete('/subcategoria/:id_subcategoria', subcategoriaController.remove); 
 
-//>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
 
 
 
@@ -71,7 +69,6 @@ router.get('/curso/:id_curso', cursoController.get);
 router.put('/curso/:id_curso', cursoController.update);
 router.delete('/curso/:id_curso', cursoController.remove);
 
-//>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
 
 router.post('/editora', editoraController.create);
 router.get('/editora', editoraController.list);
