@@ -14,6 +14,7 @@ export default function CadastroLivro() {
     const [subcategoria, setSubcategoria] = useState('');
     const [qntDisponivel, setQntDisponivel] = useState('');
 
+    const [listaAutores, setListaAutores] = useState([]);
     const [listaEditoras, setListaEditoras] = useState([]);
     const [listaCategorias, setListaCategorias] = useState([]);
     const [listaSubcategorias, setListaSubcategorias] = useState([]);
@@ -21,19 +22,61 @@ export default function CadastroLivro() {
     useEffect(() => {
         async function fetchDados() {
             try {
-                const editorasRes = await fetch('http://localhost:3000/api/editoras');
+                const autoresRes = await fetch('http://localhost:3000/api/autor');
+                const editorasRes = await fetch('http://localhost:3000/api/editora');
                 const categoriasRes = await fetch('http://localhost:3000/api/categoria');
-                const subcategoriasRes = await fetch('http://localhost:3000/api/subcategoria');
+                // const subcategoriasRes = await fetch('http://localhost:3000/api/subcategoria');
 
+                const autoresJson = await autoresRes.json();
+                setListaAutores(Array.isArray(autoresJson) ? autoresJson : []);
                 setListaEditoras(await editorasRes.json());
                 setListaCategorias(await categoriasRes.json());
-                setListaSubcategorias(await subcategoriasRes.json());
+                // setListaSubcategorias(await subcategoriasRes.json());
             } catch (error) {
                 console.error('Erro ao buscar dados do backend', error);
             }
         }
         fetchDados();
     }, []);
+    useEffect(() => {
+        async function buscarSubcategorias() {
+            if (!categoria) return;
+            try {
+                const res = await fetch(`http://localhost:3000/api/categoria/${categoria}/subcategorias`);
+                const dados = await res.json();
+                setListaSubcategorias(dados);
+                setSubcategoriasSelecionadas([]); // limpa seleção anterior
+            } catch (error) {
+                console.error('Erro ao buscar subcategorias', error);
+            }
+        }
+        buscarSubcategorias();
+    }, [categoria]);
+
+    async function adicionarAutor() {
+        if (!nomeAutor.trim()) return alert('Digite o nome do autor');
+        try {
+            const resposta = await fetch('http://localhost:3000/api/autor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome_autor: nomeAutor })
+            });
+
+            if (resposta.ok) {
+                const novoAutor = await resposta.json();
+                setAutores([...autores, novoAutor.id_autor]);
+                setNomeAutor('');
+                const novaLista = await fetch('http://localhost:3000/api/autor');
+                setListaAutores(await novaLista.json());
+            } else {
+                const erro = await resposta.json();
+                alert('Erro ao adicionar autor: ' + (erro.error || 'Erro desconhecido'));
+            }
+        } catch (err) {
+            alert('Erro ao conectar com o servidor.');
+            console.error(err);
+        }
+    }
 
     async function cadastroLivro(e) {
         e.preventDefault();
@@ -44,8 +87,8 @@ export default function CadastroLivro() {
             edicao,
             isbn,
             id_editora: Number(editora),
-            nomes_autores: autores,
-            ids_subcategorias: [Number(subcategoria)]
+            ids_autores: autores,
+            ids_subcategorias: subcategoriasSelecionadas
         };
 
         try {
@@ -63,8 +106,9 @@ export default function CadastroLivro() {
                 setNomeAutor('');
                 setAutores([]);
                 setCategoria('');
-                setSubcategoria('');
+                setSubcategoriasSelecionadas([]);
                 setQntDisponivel('');
+                setListaSubcategorias([]);
             } else {
                 const erro = await resposta.json();
                 alert('Erro ao cadastrar: ' + (erro.error || 'Erro desconhecido'));
@@ -75,16 +119,13 @@ export default function CadastroLivro() {
         }
     }
 
-    function adicionarAutor() {
-        if (!nomeAutor.trim()) {
-            alert("Digite o nome do autor");
-            return;
-        }
-
-        setAutores(prev => [...prev, nomeAutor.trim()]);
-        setNomeAutor('');
+    function toggleSubcategoria(id) {
+        setSubcategoriasSelecionadas(prev =>
+            prev.includes(id)
+                ? prev.filter(s => s !== id)
+                : [...prev, id]
+        );
     }
-
 
     return (
         <div>
@@ -111,12 +152,8 @@ export default function CadastroLivro() {
 
                             <p>Selecione a editora</p>
                             <select name="" id="" value={editora} onChange={e => setEditora(e.target.value)}>
-                                <option value="">Selecione</option>
-                                {listaEditoras.map(editora => (
-                                    <option key={editora.id_editora} value={editora.id_editora}>
-                                        {editora.nome_editora}
-                                    </option>
-                                ))}
+                                <option value="1">Editora 34</option>
+                                <option value="2">Editora Rocco</option>
 
                             </select>
 
@@ -132,8 +169,6 @@ export default function CadastroLivro() {
                         <input type="text" placeholder="Nome do autor" value={nomeAutor} onChange={(e) => setNomeAutor(e.target.value)}></input>
                         <button onClick={adicionarAutor}>Adicionar</button>
 
-                        {/* <p>Quantidade de autores do livro</p>
-                        <input type="number" /> */}
 
                         <p>Autores adicionados:</p>
                         <ul>
@@ -141,6 +176,7 @@ export default function CadastroLivro() {
                                 <li key={index}>{autor}</li>
                             ))}
                         </ul>
+
 
                         <p>Quantidade disponível</p>
                         <input
@@ -150,20 +186,33 @@ export default function CadastroLivro() {
                         />
 
                         <p>Categoria</p>
-                        <select name="" id="" value={categoria} onChange={e => setCategoria(e.target.value)}>
-                            <option value="">Selecione</option>
-                            {listaCategorias.map(cat => (
-                                <option key={cat.id_categoria} value={cat.id_categoria}>{cat.nome_categoria}</option>
-                            ))}
+                        <select value={categoria} onChange={e => setCategoria(e.target.value)}>
+                            <option value="1">Ficção</option>
+                            <option value="2">Não Ficção</option>
+                            <option value="3">Infantil e Juvenil</option>
+                            <option value="4">Poesia e Teatro</option>
+                            <option value="5">Artes e Técnicas</option>
+                            <option value="6">Técnico e Acadêmico</option>
+                            <option value="7">Outros</option>
+                            {/* outras categorias fixas */}
                         </select>
 
-                        <p>Subcategoria</p>
-                        <select name="" id="" value={subcategoria} onChange={e => setSubcategoria(e.target.value)}>
-                            <option value="">Selecione</option>
-                            {listaSubcategorias.map(sub => (
-                                <option key={sub.id_subcategoria} value={sub.id_subcategoria}>{sub.nome_subcategoria}</option>
-                            ))}
-                        </select>
+
+                        {listaSubcategorias.length > 0 && (
+                            <>
+                                <p>Subcategorias:</p>
+                                {listaSubcategorias.map(sub => (
+                                    <label key={sub.id_subcategoria}>
+                                        <input
+                                            type="checkbox"
+                                            checked={subcategoriasSelecionadas.includes(sub.id_subcategoria)}
+                                            onChange={() => toggleSubcategoria(sub.id_subcategoria)}
+                                        />
+                                        {sub.nome_subcategoria}
+                                    </label>
+                                ))}
+                            </>
+                        )}
 
                     </div>
 

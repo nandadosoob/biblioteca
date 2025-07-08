@@ -1,6 +1,7 @@
 const modelLivro = require('../models/Livro'); // seu DAO
 
 const create = async (req, res) => {
+    
     const { titulo, qtd_disponivel, edicao, isbn } = req.body;
     try {
         await modelLivro.create(titulo, qtd_disponivel, edicao, isbn);
