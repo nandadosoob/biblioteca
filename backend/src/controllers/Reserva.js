@@ -17,6 +17,14 @@ async function create(req, res) {
   }
 
   try {
+
+    const temDivida = await modelReserva.locatarioTemDividaPendente(id_locatario);
+    if (temDivida) {
+      return res.status(403).json({
+        error: 'Empréstimo bloqueado: o locatário possui dívidas pendentes.'
+      });
+    }
+
     // 2. Obter tipo do locatário (aluno ou professor)
     const locatario = await modelLocatario.getById(id_locatario);
     if (!locatario) {
@@ -136,6 +144,17 @@ async function registrarEntrega(req, res) {
 
     // Calcula a multa após atualizar a entrega
     const multa = await modelReserva.calcularMulta(id_livro, id_locatario, data_reserva);
+
+    if (multa > 0) {
+      await modelReserva.registrarDivida({
+        id_livro, 
+        id_locatario, 
+        data_reserva,
+        valor: multa,
+        estado: 'pendente',
+        data_divida: new Date()
+  });
+}
 
     res.status(200).json({
       message: 'Data de entrega registrada com sucesso',

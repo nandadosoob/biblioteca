@@ -1,4 +1,5 @@
 const modelDivida = require('../models/Divida');
+const db = require('../dbConfig').pgPool;
 
 
 async function create(req, res) {
@@ -43,13 +44,38 @@ async function get(req, res) {
     }
 }
 
+
+async function atualizarEstado(req, res) {
+  const { id_divida } = req.params;
+  const { novo_estado } = req.body;
+
+  if (!['quitada', 'perdoada'].includes(novo_estado)) {
+    return res.status(400).json({ error: 'Estado inválido. Use "quitada" ou "perdoada".' });
+  }
+
+  try {
+    const result = await db.query(
+      'UPDATE divida SET estado = $1 WHERE id_divida = $2 RETURNING *',
+      [novo_estado, id_divida]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Dívida não encontrada' });
+    }
+
+    res.status(200).json({ message: `Dívida ${novo_estado} com sucesso`, divida: result.rows[0] });
+  } catch (error) {
+    console.error('Erro ao atualizar estado da dívida:', error.message);
+    res.status(500).json({ error: 'Erro interno ao atualizar dívida' });
+  }
+}
 async function update(req, res) {
   const id_divida = req.params.id_divida;
   const { id_locatario, id_livro, data_reserva, estado, valor, data_divida} = req.body;
 
   if (!id_locatario || !id_livro) {
-    return res.status(400).json({ error: 'Nome do locatario obrigatório' });
-  }
+  return res.status(400).json({ error: 'Campos obrigatórios: id_locatario e id_livro' });
+}
 
   try {
     const updatedCount = await modelDivida.update(id_divida, id_locatario, id_livro, data_reserva, estado, valor, data_divida);
@@ -76,4 +102,5 @@ async function remove(req, res) {
 }
 
 
-module.exports = { create, list, get, update, remove };
+
+module.exports = { create, list, get, atualizarEstado, update, remove  };

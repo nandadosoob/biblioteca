@@ -35,6 +35,7 @@ router.delete('/locatario/:id_locatario', locatarioController.remove);
 router.post('/divida',  dividaController.create);
 router.get('/divida',  dividaController.list);
 router.get('/divida/:id_divida', dividaController.get);
+router.put('/divida/:id_divida/estado', dividaController.atualizarEstado);
 router.put('/divida/:id_divida', dividaController.update);   
 router.delete('/divida/:id_divida', dividaController.remove); 
 
@@ -44,7 +45,6 @@ router.get('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.g
 router.put('/reserva/:id_livro/:id_locatario/:data_reserva/entrega', reservaController.registrarEntrega);  
 router.put('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.update); 
 router.delete('/reserva/:id_livro/:id_locatario/:data_reserva', reservaController.remove); 
-
 
 
 // router.post('/categoria', categoriaController.create);

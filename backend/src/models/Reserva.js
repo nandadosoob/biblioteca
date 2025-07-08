@@ -128,6 +128,37 @@ async function quantidadeReservasAtivasPorLivro(id_livro) {
     }
 }
 
+async function registrarDivida({ id_livro, id_locatario, data_reserva, valor, estado, data_divida }) {
+  const query = `
+    INSERT INTO divida (id_livro, id_locatario, data_reserva, valor, estado, data_divida)
+    VALUES ($1, $2, $3, $4, $5, $6)
+  `;
+  const values = [id_livro, id_locatario, data_reserva, valor, estado, data_divida];
+  try {
+    await pgPool.query(query, values);
+  } catch (error) {
+    console.error('Erro ao registrar dívida:', error.message);
+    throw error;
+  }
+}
+
+async function locatarioTemDividaPendente(id_locatario) {
+  const query = `
+    SELECT 1 FROM divida
+    WHERE id_locatario = $1 AND estado = 'pendente'
+    LIMIT 1
+  `;
+  try {
+    const result = await pgPool.query(query, [id_locatario]);
+    return result.rowCount > 0;
+  } catch (error) {
+    console.error("Erro ao verificar dívida pendente:", error.message);
+    throw error;
+  }
+}
+
+
+
 module.exports = {
     create,
     list,
@@ -137,5 +168,7 @@ module.exports = {
     remove,
     quantidadeReservasAtivasPorUsuario,
     calcularMulta,
-    quantidadeReservasAtivasPorLivro
+    quantidadeReservasAtivasPorLivro,
+    registrarDivida,
+    locatarioTemDividaPendente
 };
