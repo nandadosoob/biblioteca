@@ -105,9 +105,9 @@ CREATE TABLE Categoria_tem_subcategoria (
 CREATE TABLE Livro_tem_Categoria (
     id_livro_categoria SERIAL PRIMARY KEY,
     id_livro INT,
-    id_subcategoria INT,
+    id_categoria INT,
     FOREIGN KEY (id_livro) REFERENCES Livro(id_livro) ON DELETE CASCADE,
-    FOREIGN KEY (id_subcategoria) REFERENCES Subcategoria(id_subcategoria) ON DELETE CASCADE
+    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria) ON DELETE CASCADE
 );
 
 -- Tabela Reservas

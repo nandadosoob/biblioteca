@@ -131,7 +131,7 @@ export default function CadastroLivro() {
         <div>
             <div id="main3">
 
-                <div id="questionario" onSubmit={cadastroLivro}>
+                <div id="questionario">
                     <div id="box1">
                         <div id="box4">
                             <div id="campoImagem">
@@ -198,9 +198,9 @@ export default function CadastroLivro() {
                         </select>
 
 
+                        <p>Subcategorias:</p>
                         {listaSubcategorias.length > 0 && (
                             <>
-                                <p>Subcategorias:</p>
                                 {listaSubcategorias.map(sub => (
                                     <label key={sub.id_subcategoria}>
                                         <input
@@ -218,7 +218,7 @@ export default function CadastroLivro() {
 
                     <div id="divBotoes">
                         <button id="botaoCancela">Cancelar</button>
-                        <button id="botaoCadastra">Cadastrar</button>
+                        <button id="botaoCadastra" onClick={cadastroLivro}>Cadastrar</button>
 
                     </div>
 
