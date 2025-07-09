@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import './CadastroUsuario.css'
+import './CadastroUsuario.css';
 
 export default function CadastroUsuario() {
 
@@ -13,6 +12,20 @@ export default function CadastroUsuario() {
     const [telefone, setTelefone] = useState('');
     const [login, setLogin] = useState('');
     const [senha, setSenha] = useState('');
+
+   function formatarTelefone(valor) {
+    const numeros = valor.replace(/\D/g, '').slice(0, 11); // limita a 11 dígitos
+
+    if (numeros.length <= 2) {
+        return `(${numeros}`;
+    } else if (numeros.length <= 6) {
+        return `(${numeros.slice(0, 2)}) ${numeros.slice(2)}`;
+    } else if (numeros.length <= 10) {
+        return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+    } else {
+        return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+    }
+}
 
     async function handleCadastrar(e) {
         e.preventDefault();
@@ -27,26 +40,21 @@ export default function CadastroUsuario() {
             telefone: telefone,
             login: tipo === "Bibliotecario" ? login : null,
             senha: tipo === "Bibliotecario" ? senha : null,
-
         };
 
         try {
             const resposta = await fetch('http://localhost:3000/api/locatario', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(dados)
             });
-            alert('Cadastrado com sucesso');
-            setNome('');
 
             if (resposta.ok) {
                 alert('Usuário cadastrado com sucesso!');
                 setNome('');
                 setRa('');
                 setTipo('Aluno');
-                setCurso(1);
+                setCurso('1');
                 setDataNascimento('');
                 setEmail('');
                 setTelefone('');
@@ -62,19 +70,14 @@ export default function CadastroUsuario() {
         }
     }
 
-
     return (
         <div id="main4">
-
-            <div id="box" >
-
-
+            <div id="box">
                 <p id="nom">Nome</p>
                 <input type="text" id="nome" value={nome} onChange={e => setNome(e.target.value)} required />
 
                 <p>RA</p>
                 <input type="number" id="ra" value={ra} onChange={e => setRa(e.target.value)} />
-
 
                 <p>Tipo de Usuário</p>
                 <select id="tipo" value={tipo} onChange={e => setTipo(e.target.value)} required>
@@ -93,38 +96,51 @@ export default function CadastroUsuario() {
                     </>
                 )}
 
-
                 <p>Curso</p>
                 <select id="curso" value={curso} onChange={e => setCurso(e.target.value)} required>
                     <option value="1">BCC</option>
                 </select>
 
                 <p id="dataNascimento">Data de Nascimento</p>
-                <input type="date" id="dataNascimento" value={dataNascimento} onChange={e => setDataNascimento(e.target.value)} required
+                <input
+                    type="date"
+                    id="dataNascimento"
+                    value={dataNascimento}
+                    onChange={e => setDataNascimento(e.target.value)}
+                    required
                 />
 
                 <p>E-Mail</p>
                 <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} required />
 
                 <p>Telefone</p>
-                <input type="tel" id="telefone" value={telefone} onChange={e => setTelefone(e.target.value)} />
+                <input
+                    type="tel"
+                    id="telefone"
+                    value={telefone}
+                    onChange={e => setTelefone(formatarTelefone(e.target.value))}
+                    />
+
 
                 <div id="divBotoes">
-                    <button id="botaoCancela" type="reset" onClick={() => {
-                        setNome('');
-                        setRa('');
-                        setTipo('Aluno');
-                        setCurso('');
-                        setDataNascimento('');
-                        setEmail('');
-                        setTelefone('');
-                    }}>Cancelar</button>
+                    <button
+                        id="botaoCancela"
+                        type="reset"
+                        onClick={() => {
+                            setNome('');
+                            setRa('');
+                            setTipo('Aluno');
+                            setCurso('');
+                            setDataNascimento('');
+                            setEmail('');
+                            setTelefone('');
+                        }}
+                    >
+                        Cancelar
+                    </button>
                     <button type="submit" id="botaoCadastra" onClick={handleCadastrar}>Cadastrar</button>
-
                 </div>
-
-
             </div>
         </div>
-    )
+    );
 }

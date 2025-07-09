@@ -1,34 +1,33 @@
 const nodemailer = require('nodemailer');
-require('dotenv').config(); 
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_ADDRESS,
-    pass: process.env.EMAIL_PASS,
+    pass: process.env.EMAIL_PASS, // senha de app do Gmail
   },
   tls: {
     rejectUnauthorized: false,
   },
 });
 
-
-async function enviarEmail(emailDestino, assunto, mensagem) {
+function enviarEmail(destino, assunto, texto) {
   const mailOptions = {
     from: process.env.EMAIL_ADDRESS,
-    to: emailDestino,
+    to: destino,
     subject: assunto,
-    text: mensagem,
+    text: texto,
   };
 
-  try {
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email enviado: ' + info.response);
-  } catch (error) {
-    console.error('Erro ao enviar e-mail:', error);
-    throw error; //ver no controller
-  }
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Erro ao enviar email:', error);
+    } else {
+      console.log('Email enviado:', info.response);
+    }
+  });
 }
 
 module.exports = enviarEmail;
