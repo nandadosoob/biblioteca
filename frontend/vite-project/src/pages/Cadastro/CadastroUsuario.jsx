@@ -5,7 +5,7 @@ export default function CadastroUsuario() {
 
     const [nome, setNome] = useState('');
     const [ra, setRa] = useState('');
-    const [tipo, setTipo] = useState('Aluno');
+    const [tipo, setTipo] = useState('aluno');
     const [curso, setCurso] = useState('1');
     const [dataNascimento, setDataNascimento] = useState('');
     const [email, setEmail] = useState('');
@@ -53,7 +53,7 @@ export default function CadastroUsuario() {
                 alert('Usuário cadastrado com sucesso!');
                 setNome('');
                 setRa('');
-                setTipo('Aluno');
+                setTipo('aluno');
                 setCurso('1');
                 setDataNascimento('');
                 setEmail('');
@@ -81,7 +81,7 @@ export default function CadastroUsuario() {
 
                 <p>Tipo de Usuário</p>
                 <select id="tipo" value={tipo} onChange={e => setTipo(e.target.value)} required>
-                    <option value="Aluno">Aluno</option>
+                    <option value="aluno">Aluno</option>
                     <option value="Professor">Professor</option>
                     <option value="Bibliotecario">Bibliotecario</option>
                 </select>
@@ -129,7 +129,7 @@ export default function CadastroUsuario() {
                         onClick={() => {
                             setNome('');
                             setRa('');
-                            setTipo('Aluno');
+                            setTipo('aluno');
                             setCurso('');
                             setDataNascimento('');
                             setEmail('');
