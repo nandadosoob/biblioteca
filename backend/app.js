@@ -21,5 +21,4 @@ app.get('', (req, res) => {
 
 // const subcategoriaRoutes = require('./routes/subcategoriaRoutes');
 // app.use('/subcategorias', subcategoriaRoutes);
-//>>>>>>> c6da8ae6788c715be2d282e448f47ddcedc9cb81
 
