@@ -1,14 +1,6 @@
 #Bem vindo ao projeto da livraria desenvolvida no ensino médio
 Esse é um projeto que foi proposto para consolidar os conhecimentos obtidos no decorrer do curso.
 
-# CAMINHOS ROTA
-
-atualizar livro:
-http://localhost:3000/api/livro/algumid
-
-ativar livro: 
-http://localhost:3000/livro/1/reativar
-
 
 # Título e descrição do projeto
 
@@ -71,7 +63,12 @@ cd frontend
 npm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+3. Acesse a pasta vite-project:
+```bash
+cd vite-project
+```
+
+4. Inicie o servidor de desenvolvimento:
 ```bash
 npm run dev
 ```
