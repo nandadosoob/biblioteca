@@ -135,7 +135,7 @@ biblioteca/
 |--------------------|----------------------------------------------------|
 | **Denise Cardoso** | Frontend, documentação e apoio no backend          |
 | **Fernanda Rocha** | Backend, frontend e testes                         |
-| **Beatriz Oliveira** | Backend, frontend e testes                       |
+| **Beatriz Oliveira** | Backend, frontend ,testes e organização trello                  |
 
 ---
 
