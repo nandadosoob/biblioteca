@@ -122,6 +122,7 @@ biblioteca/
 - `POST /locatarios` → cadastra um novo locatário e envia e-mail de confirmação  
 - `PUT /livros/:id` → edita informações de um livro específico  
 - `POST /emprestimos` → realiza um novo empréstimo (colaborador autenticado)
+![alt text](<WhatsApp Image 2025-07-09 at 10.32.45.jpeg>)
 
 ---
 
