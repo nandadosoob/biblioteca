@@ -32,22 +32,18 @@ cd backend
 
 2. Instale as dependências:
 ```bash
-npm install
+npm init
+npm install express
+npm install -g nodemon
 ```
 
-3. Crie um arquivo `.env` na pasta `backend/` com o seguinte conteúdo:
-
-```
-EMAIL_ADDRESS=seuemail@gmail.com
-EMAIL_PASS=suaSenhaDeAppDoGmail
-```
-
-4. Execute o servidor:
+3. Execute o servidor:
 ```bash
 node app.js
 ```
 
 > API disponível na porta: `http://localhost:3000`
+> utilizamos a ferramenta hoppscotch para testar as rotas
 
 ---
 
@@ -58,14 +54,13 @@ node app.js
 cd frontend
 ```
 
-2. Instale as dependências:
-```bash
-npm install
-```
-
-3. Acesse a pasta vite-project:
+2. Acesse a pasta vite-project:
 ```bash
 cd vite-project
+```
+3. Instale as dependências:
+```bash
+npm install 
 ```
 
 4. Inicie o servidor de desenvolvimento:
@@ -90,6 +85,9 @@ biblioteca/
 │   ├── app.js                 # Arquivo principal do backend
 │   └── .env                   # Variáveis de ambiente
 │
+├── database                   
+│   ├── livraria.sql           #sql do banco de dados usando o postgres
+│
 ├── frontend/
 │   ├── src/
 │   │   ├── components/        # Componentes visuais reutilizáveis
@@ -106,21 +104,19 @@ biblioteca/
 -  **Categorias e subcategorias** (ex: Computação → IA, Engenharia de Software)
 -  Marcação de livros como **indisponíveis**, sem deletar do banco
 -  **Filtro de busca** por título, autor e categoria
--  **CRUD de usuários** (aluno e professor), com desabilitação ao invés de exclusão
--  **Autenticação de colaboradores** da biblioteca para acesso às funcionalidades restritas
+-  **CRUD de usuários** (aluno e professor), com desabilitação ao invés de exclusão (backend)
 -  **Empréstimos com controle de regras:**
   - Alunos: até 3 livros por 14 dias
   - Professores: até 5 livros por 30 dias
   - Multa de R$1,00 por dia de atraso
   - Bloqueio de empréstimo se houver pendência
 -  Controle de **quantidade de exemplares**
--  **Envio de e-mail** ao usuário quando um livro é emprestado ou devolvido
 -  **Histórico de empréstimos e devoluções por usuário**
 -  Design **responsivo** para desktop e mobile
 
 ---
 
-## 📬 Exemplo de uso da API
+## Exemplo de uso da API
 
 - `GET /livros` → retorna todos os livros cadastrados  
 - `POST /locatarios` → cadastra um novo locatário e envia e-mail de confirmação  
@@ -133,25 +129,8 @@ biblioteca/
 
 | Nome               | Responsabilidades                                  |
 |--------------------|----------------------------------------------------|
-| **Denise Cardoso** | Frontend, documentação e apoio no backend          |
+| **Denise Cardoso** | Frontend, documentação, testes e apoio no backend  |
 | **Fernanda Rocha** | Backend, frontend e testes                         |
-| **Beatriz Oliveira** | Backend, frontend ,testes e organização trello                  |
+| **Beatriz Oliveira** | Backend,documentação, frontend e testes          |
 
 ---
-
-## Tecnologias Utilizadas
-
-- Node.js
-- Express.js
-- PostgreSQL
-- React + Vite
-- Nodemailer (Gmail API)
-- GitHub & Trello (Scrum)
-
----
-
-## Observações Finais
-
-- O sistema foi desenvolvido aplicando as **heurísticas de usabilidade de Nielsen**
-- A pesquisa de livros é **pública** (não exige login)
-- Integração com **serviços externos** como o Gmail foi implementada para envio automático de notificações
