@@ -154,5 +154,4 @@ biblioteca/
 
 - O sistema foi desenvolvido aplicando as **heurísticas de usabilidade de Nielsen**
 - A pesquisa de livros é **pública** (não exige login)
-- O restante do sistema exige **autenticação dos colaboradores**
 - Integração com **serviços externos** como o Gmail foi implementada para envio automático de notificações
