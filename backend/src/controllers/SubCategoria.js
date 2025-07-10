@@ -22,7 +22,7 @@ async function get(req, res) {
     const { id_subcategoria } = req.params;
 
     try {
-        const categoria = await SubCategoria.get(id_subcategoria);
+        const subcategoria= await SubCategoria.get(id_subcategoria);
         if (!subcategoria) {
             return res.status(404).json({ erro: 'Categoria não encontrada' });
         }
