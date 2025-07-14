@@ -6,11 +6,11 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_ADDRESS,
-    pass: process.env.EMAIL_PASS, // senha de app do Gmail
+    pass: process.env.EMAIL_PASS,
   },
   tls: {
     rejectUnauthorized: false,
-  },
+  }
 });
 
 function enviarEmail(destino, assunto, texto) {
@@ -21,9 +21,9 @@ function enviarEmail(destino, assunto, texto) {
     text: texto,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('Erro ao enviar email:', error);
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log('Erro ao enviar email:', err);
     } else {
       console.log('Email enviado:', info.response);
     }

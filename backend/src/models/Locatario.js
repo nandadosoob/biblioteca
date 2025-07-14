@@ -83,7 +83,6 @@
 const dbConfig = require('../dbConfig');
 const pgPool = dbConfig.pgPool;
 
-// Função responsável por criar um locatário
 async function create(ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha){
     const query = "INSERT INTO locatario (ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)";
     let values = [ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha];
@@ -96,19 +95,17 @@ async function create(ra, tipo, nome_locatario, curso, data_nascimento, email, t
     }
 }
 
-// Função que verifica se o email já está cadastrado
+
 async function existsEmail(email) {
     const query = "SELECT 1 FROM locatario WHERE email = $1 LIMIT 1";
     try {
         const result = await pgPool.query(query, [email]);
-        return result.rowCount > 0; // true se existir
+        return result.rowCount > 0;
     } catch (error) {
         console.error('Erro no existsEmail do locatario:', error.message);
         throw error;
     }
 }
-
-// Outras funções (list, get, update, remove, getById) continuam iguais...
 
 async function list(){
     const query = "SELECT id_locatario, nome_locatario FROM locatario";
@@ -132,6 +129,7 @@ async function get(id_locatario){
     }
 }
 
+// Atualiza locatário
 async function update(id_locatario, ra, tipo, nome_locatario, curso, data_nascimento, email, telefone, login, senha) {
     const query = "UPDATE locatario SET ra = $2, tipo = $3, nome_locatario = $4, curso = $5, data_nascimento = $6, email = $7, telefone = $8, login = $9, senha = $10 WHERE id_locatario = $1";
     try {
@@ -143,6 +141,7 @@ async function update(id_locatario, ra, tipo, nome_locatario, curso, data_nascim
     }
 }
 
+// Remove locatário
 async function remove(id_locatario) {
     const query = "DELETE FROM locatario WHERE id_locatario = $1";
     try {
